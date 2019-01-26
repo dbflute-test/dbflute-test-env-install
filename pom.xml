@@ -8,7 +8,7 @@
 	<packaging>jar</packaging>
 
 	<name>DBFlute Test as Environment Install</name>
-	<description>test project as environment stage named for using Spring and H2</description>
+	<description>test project of DBFlute install, by intro, maven </description>
 	<url>https://github.com/dbflute-test/dbflute-test-env-install</url>
 	<inceptionYear>2014</inceptionYear>
 

@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of SERVICE_RANK.
+ * The base condition-query of service_rank.
  * @author DBFlute(AutoGenerator)
  */
 public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
@@ -35,7 +35,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from SERVICE_RANK) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from service_rank) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join SERVICE_RANK on ... and FOO = [value] ...}
+     * {select ... from ... left outer join service_rank on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -93,7 +93,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
     public Map<String, Object> xdfgetServiceRankCode_QueryDerivedReferrer_MemberServiceListParameter() { return xgetSQuePmMap("serviceRankCode_QueryDerivedReferrer_MemberServiceList"); }
     public String keepServiceRankCode_QueryDerivedReferrer_MemberServiceListParameter(Object pm) { return xkeepSQuePm("serviceRankCode_QueryDerivedReferrer_MemberServiceList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
@@ -113,7 +113,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
       return _serviceRankName; }
     protected ConditionValue xgetCValueServiceRankName() { return xdfgetServiceRankName(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -133,7 +133,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
       return _servicePointIncidence; }
     protected ConditionValue xgetCValueServicePointIncidence() { return xdfgetServicePointIncidence(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
      * @return this. (NotNull)
@@ -153,16 +153,16 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
       return _newAcceptableFlg; }
     protected ConditionValue xgetCValueNewAcceptableFlg() { return xdfgetNewAcceptableFlg(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INTEGER(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_NewAcceptableFlg_Asc() { regOBA("NEW_ACCEPTABLE_FLG"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INTEGER(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_NewAcceptableFlg_Desc() { regOBD("NEW_ACCEPTABLE_FLG"); return this; }
@@ -173,7 +173,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
       return _description; }
     protected ConditionValue xgetCValueDescription() { return xdfgetDescription(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * DESCRIPTION: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -193,16 +193,16 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
       return _displayOrder; }
     protected ConditionValue xgetCValueDisplayOrder() { return xdfgetDisplayOrder(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }

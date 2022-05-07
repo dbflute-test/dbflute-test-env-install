@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of PRODUCT_CATEGORY.
+ * The base condition-query of product_category.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
@@ -35,7 +35,7 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from PRODUCT_CATEGORY) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from product_category) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join PRODUCT_CATEGORY on ... and FOO = [value] ...}
+     * {select ... from ... left outer join product_category on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -107,7 +107,7 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
     public Map<String, Object> xdfgetProductCategoryCode_QueryDerivedReferrer_ProductCategorySelfListParameter() { return xgetSQuePmMap("productCategoryCode_QueryDerivedReferrer_ProductCategorySelfList"); }
     public String keepProductCategoryCode_QueryDerivedReferrer_ProductCategorySelfListParameter(Object pm) { return xkeepSQuePm("productCategoryCode_QueryDerivedReferrer_ProductCategorySelfList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_CATEGORY_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
@@ -127,7 +127,7 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
       return _productCategoryName; }
     protected ConditionValue xgetCValueProductCategoryName() { return xdfgetProductCategoryName(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -147,16 +147,16 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
       return _parentCategoryCode; }
     protected ConditionValue xgetCValueParentCategoryCode() { return xdfgetParentCategoryCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY}
+     * PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category}
      * @return this. (NotNull)
      */
     public BsProductCategoryCQ addOrderBy_ParentCategoryCode_Asc() { regOBA("PARENT_CATEGORY_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY}
+     * PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category}
      * @return this. (NotNull)
      */
     public BsProductCategoryCQ addOrderBy_ParentCategoryCode_Desc() { regOBD("PARENT_CATEGORY_CODE"); return this; }
@@ -212,7 +212,7 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * PRODUCT_CATEGORY by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
+     * product_category by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
      * @return The instance of condition-query. (NotNull)
      */
     public ProductCategoryCQ queryProductCategorySelf() {
@@ -224,7 +224,7 @@ public class BsProductCategoryCQ extends AbstractBsProductCategoryCQ {
         return xgetQueRlMap(prop);
     }
     protected ProductCategoryCQ xcreateQueryProductCategorySelf() {
-        String nrp = xresolveNRP("PRODUCT_CATEGORY", "productCategorySelf"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("product_category", "productCategorySelf"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new ProductCategoryCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "productCategorySelf", nrp);
     }
     protected void xsetupOuterJoinProductCategorySelf() { xregOutJo("productCategorySelf"); }

@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of PURCHASE_PAYMENT.
+ * The base condition-query of purchase_payment.
  * @author DBFlute(AutoGenerator)
  */
 public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
@@ -35,7 +35,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from PURCHASE_PAYMENT) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from purchase_payment) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join PURCHASE_PAYMENT on ... and FOO = [value] ...}
+     * {select ... from ... left outer join purchase_payment on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -79,7 +79,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _purchasePaymentId; }
     protected ConditionValue xgetCValuePurchasePaymentId() { return xdfgetPurchasePaymentId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return this. (NotNull)
@@ -99,16 +99,16 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _purchaseId; }
     protected ConditionValue xgetCValuePurchaseId() { return xdfgetPurchaseId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to PURCHASE}
+     * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_PurchaseId_Asc() { regOBA("PURCHASE_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to PURCHASE}
+     * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_PurchaseId_Desc() { regOBD("PURCHASE_ID"); return this; }
@@ -119,7 +119,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _paymentAmount; }
     protected ConditionValue xgetCValuePaymentAmount() { return xdfgetPaymentAmount(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)}
      * @return this. (NotNull)
@@ -139,16 +139,16 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _paymentDatetime; }
     protected ConditionValue xgetCValuePaymentDatetime() { return xdfgetPaymentDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * PAYMENT_DATETIME: {IX+, NotNull, TIMESTAMP(23, 10)}
+     * PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_PaymentDatetime_Asc() { regOBA("PAYMENT_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PAYMENT_DATETIME: {IX+, NotNull, TIMESTAMP(23, 10)}
+     * PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_PaymentDatetime_Desc() { regOBD("PAYMENT_DATETIME"); return this; }
@@ -159,7 +159,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _paymentMethodCode; }
     protected ConditionValue xgetCValuePaymentMethodCode() { return xdfgetPaymentMethodCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PAYMENT_METHOD_CODE: {NotNull, CHAR(3)}
      * @return this. (NotNull)
@@ -179,16 +179,16 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _registerDatetime; }
     protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -199,7 +199,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _registerUser; }
     protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -219,16 +219,16 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _updateDatetime; }
     protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchasePaymentCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -239,7 +239,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
       return _updateUser; }
     protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -304,7 +304,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * PURCHASE by my PURCHASE_ID, named 'purchase'.
+     * purchase by my PURCHASE_ID, named 'purchase'.
      * @return The instance of condition-query. (NotNull)
      */
     public PurchaseCQ queryPurchase() {
@@ -316,7 +316,7 @@ public class BsPurchasePaymentCQ extends AbstractBsPurchasePaymentCQ {
         return xgetQueRlMap(prop);
     }
     protected PurchaseCQ xcreateQueryPurchase() {
-        String nrp = xresolveNRP("PURCHASE_PAYMENT", "purchase"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("purchase_payment", "purchase"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new PurchaseCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "purchase", nrp);
     }
     protected void xsetupOuterJoinPurchase() { xregOutJo("purchase"); }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of WITHDRAWAL_REASON as TABLE. <br>
+ * The behavior of withdrawal_reason as TABLE. <br>
  * <pre>
  * [primary key]
  *     WITHDRAWAL_REASON_CODE
@@ -41,7 +43,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     MEMBER_WITHDRAWAL
+ *     member_withdrawal
  *
  * [foreign property]
  *     
@@ -65,7 +67,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
     /** {@inheritDoc} */
     public WithdrawalReasonDbm asDBMeta() { return WithdrawalReasonDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "WITHDRAWAL_REASON"; }
+    public String asTableDbName() { return "withdrawal_reason"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">withdrawalReason</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">withdrawalReasonBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -186,7 +188,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
 
     /**
      * Select the entity by the unique-key value.
-     * @param displayOrder : UQ, NotNull, INTEGER(10). (NotNull)
+     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -315,7 +317,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -386,7 +388,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
 
     /**
      * Load referrer of memberWithdrawalList by the set-upper of referrer. <br>
-     * MEMBER_WITHDRAWAL by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
+     * member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
      * <pre>
      * <span style="color: #0000C0">withdrawalReasonBhv</span>.<span style="color: #CC4747">loadMemberWithdrawal</span>(<span style="color: #553000">withdrawalReasonList</span>, <span style="color: #553000">withdrawalCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">withdrawalCB</span>.setupSelect...
@@ -417,7 +419,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
 
     /**
      * Load referrer of memberWithdrawalList by the set-upper of referrer. <br>
-     * MEMBER_WITHDRAWAL by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
+     * member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
      * <pre>
      * <span style="color: #0000C0">withdrawalReasonBhv</span>.<span style="color: #CC4747">loadMemberWithdrawal</span>(<span style="color: #553000">withdrawalReason</span>, <span style="color: #553000">withdrawalCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">withdrawalCB</span>.setupSelect...
@@ -893,8 +895,8 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * withdrawalReasonBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * withdrawalReasonBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * withdrawalReasonBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * withdrawalReasonBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * withdrawalReasonBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -902,7 +904,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
      * withdrawalReasonBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * withdrawalReasonBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * withdrawalReasonBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * withdrawalReasonBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * withdrawalReasonBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -910,7 +912,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
      * withdrawalReasonBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * withdrawalReasonBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * withdrawalReasonBhv.outideSql().removeBlockComment().selectList()
      * withdrawalReasonBhv.outideSql().removeLineComment().selectList()
      * withdrawalReasonBhv.outideSql().formatSql().selectList()
@@ -928,4 +930,25 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable<Wit
     protected Class<? extends WithdrawalReason> typeOfSelectedEntity() { return WithdrawalReason.class; }
     protected Class<WithdrawalReason> typeOfHandlingEntity() { return WithdrawalReason.class; }
     protected Class<WithdrawalReasonCB> typeOfHandlingConditionBean() { return WithdrawalReasonCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

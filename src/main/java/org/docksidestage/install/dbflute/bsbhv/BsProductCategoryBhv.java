@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of PRODUCT_CATEGORY as TABLE. <br>
+ * The behavior of product_category as TABLE. <br>
  * <pre>
  * [primary key]
  *     PRODUCT_CATEGORY_CODE
@@ -38,10 +40,10 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     PRODUCT_CATEGORY
+ *     product_category
  *
  * [referrer table]
- *     PRODUCT, PRODUCT_CATEGORY
+ *     product, product_category
  *
  * [foreign property]
  *     productCategorySelf
@@ -65,7 +67,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
     /** {@inheritDoc} */
     public ProductCategoryDbm asDBMeta() { return ProductCategoryDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "PRODUCT_CATEGORY"; }
+    public String asTableDbName() { return "product_category"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">productCategory</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -290,7 +292,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -361,7 +363,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br>
-     * PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * <pre>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #CC4747">loadProduct</span>(<span style="color: #553000">productCategoryList</span>, <span style="color: #553000">productCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">productCB</span>.setupSelect...
@@ -392,7 +394,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br>
-     * PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * <pre>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #CC4747">loadProduct</span>(<span style="color: #553000">productCategory</span>, <span style="color: #553000">productCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">productCB</span>.setupSelect...
@@ -425,7 +427,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
 
     /**
      * Load referrer of productCategorySelfList by the set-upper of referrer. <br>
-     * PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * <pre>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #CC4747">loadProductCategorySelf</span>(<span style="color: #553000">productCategoryList</span>, <span style="color: #553000">categoryCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">categoryCB</span>.setupSelect...
@@ -456,7 +458,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
 
     /**
      * Load referrer of productCategorySelfList by the set-upper of referrer. <br>
-     * PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * <pre>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #CC4747">loadProductCategorySelf</span>(<span style="color: #553000">productCategory</span>, <span style="color: #553000">categoryCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">categoryCB</span>.setupSelect...
@@ -932,8 +934,8 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * productCategoryBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * productCategoryBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * productCategoryBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * productCategoryBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * productCategoryBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -941,7 +943,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
      * productCategoryBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * productCategoryBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * productCategoryBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * productCategoryBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * productCategoryBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -949,7 +951,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
      * productCategoryBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * productCategoryBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * productCategoryBhv.outideSql().removeBlockComment().selectList()
      * productCategoryBhv.outideSql().removeLineComment().selectList()
      * productCategoryBhv.outideSql().formatSql().selectList()
@@ -967,4 +969,25 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable<Prod
     protected Class<? extends ProductCategory> typeOfSelectedEntity() { return ProductCategory.class; }
     protected Class<ProductCategory> typeOfHandlingEntity() { return ProductCategory.class; }
     protected Class<ProductCategoryCB> typeOfHandlingConditionBean() { return ProductCategoryCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

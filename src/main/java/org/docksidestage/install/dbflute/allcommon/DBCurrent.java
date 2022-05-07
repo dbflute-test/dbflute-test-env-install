@@ -27,17 +27,14 @@ public class DBCurrent {
 
     protected DBDef _currentDBDef;
     {
-        _currentDBDef = DBDef.codeOf("h2");
-        if (_currentDBDef == null) {
-            _currentDBDef = DBDef.Unknown;
-        }
+        _currentDBDef = DBDef.of("mysql").orElse(DBDef.Unknown);
     }
-	
+
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     /**
-     * Constructor.
+     * Only for singleton.
      */
     private DBCurrent() {
     }
@@ -46,8 +43,8 @@ public class DBCurrent {
     //                                                                           Singleton
     //                                                                           =========
     /**
-     * Get singleton instance.
-     * @return Singleton instance. (NotNull)
+     * Get the saved singleton instance.
+     * @return always same instance. (NotNull)
      */
     public static DBCurrent getInstance() {
         return _instance;
@@ -85,13 +82,13 @@ public class DBCurrent {
     //                                                                       Current DBDef
     //                                                                       =============
     public void initializeCurrentDBDef(DBDef currentDBDef) {
-	    if (_log.isInfoEnabled()) {
-		    _log.info("...Setting currentDBDef: " + currentDBDef);
-		}
-		if (currentDBDef == null) {
-		    String msg = "The argument 'currentDBDef' should not be null!";
-		    throw new IllegalArgumentException(msg);
-		}
+        if (_log.isInfoEnabled()) {
+            _log.info("...Setting currentDBDef: " + currentDBDef);
+        }
+        if (currentDBDef == null) {
+            String msg = "The argument 'currentDBDef' should not be null!";
+            throw new IllegalArgumentException(msg);
+        }
         _currentDBDef = currentDBDef;
     }
 
@@ -109,6 +106,6 @@ public class DBCurrent {
      * @return The determination, true or false.
      */
     public boolean isCurrentDBDef(DBDef currentDBDef) {
-	    return _currentDBDef.equals(currentDBDef);
+        return _currentDBDef.equals(currentDBDef);
     }
 }

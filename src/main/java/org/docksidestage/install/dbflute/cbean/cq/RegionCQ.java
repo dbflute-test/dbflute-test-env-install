@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsRegionCQ;
 
 /**
- * The condition-query of REGION.
+ * The condition-query of region.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

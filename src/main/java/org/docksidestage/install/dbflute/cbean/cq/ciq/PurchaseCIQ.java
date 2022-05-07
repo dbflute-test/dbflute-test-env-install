@@ -12,7 +12,7 @@ import org.docksidestage.install.dbflute.cbean.cq.bs.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of PURCHASE.
+ * The condition-query for in-line of purchase.
  * @author DBFlute(AutoGenerator)
  */
 public class PurchaseCIQ extends AbstractBsPurchaseCQ {

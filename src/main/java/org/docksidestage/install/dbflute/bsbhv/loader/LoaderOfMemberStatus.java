@@ -9,7 +9,7 @@ import org.docksidestage.install.dbflute.exentity.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The referrer loader of MEMBER_STATUS as TABLE. <br>
+ * The referrer loader of member_status as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_STATUS_CODE
@@ -30,7 +30,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     MEMBER, MEMBER_LOGIN
+ *     member, member_login
  *
  * [foreign property]
  *     
@@ -65,7 +65,7 @@ public class LoaderOfMemberStatus {
 
     /**
      * Load referrer of memberList by the set-upper of referrer. <br>
-     * MEMBER by MEMBER_STATUS_CODE, named 'memberList'.
+     * member by MEMBER_STATUS_CODE, named 'memberList'.
      * <pre>
      * <span style="color: #0000C0">memberStatusBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">memberStatusList</span>, <span style="color: #553000">statusLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">statusLoader</span>.<span style="color: #CC4747">loadMember</span>(<span style="color: #553000">memberCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -99,7 +99,7 @@ public class LoaderOfMemberStatus {
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * MEMBER_LOGIN by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
+     * member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberStatusBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">memberStatusList</span>, <span style="color: #553000">statusLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">statusLoader</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.allcommon.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The DB meta of WITHDRAWAL_REASON. (Singleton)
+ * The DB meta of withdrawal_reason. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class WithdrawalReasonDbm extends AbstractDBMeta {
@@ -52,20 +52,22 @@ public class WithdrawalReasonDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "WITHDRAWAL_REASON";
+    protected final String _tableDbName = "withdrawal_reason";
+    protected final String _tableDispName = "withdrawal_reason";
     protected final String _tablePropertyName = "withdrawalReason";
-    protected final TableSqlName _tableSqlName = new TableSqlName("WITHDRAWAL_REASON", _tableDbName);
+    protected final TableSqlName _tableSqlName = new TableSqlName("withdrawal_reason", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
+    public String getTableDispName() { return _tableDispName; }
     public String getTablePropertyName() { return _tablePropertyName; }
     public TableSqlName getTableSqlName() { return _tableSqlName; }
 
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnWithdrawalReasonCode = cci("WITHDRAWAL_REASON_CODE", "WITHDRAWAL_REASON_CODE", null, null, String.class, "withdrawalReasonCode", null, true, false, true, "CHAR", 3, 0, null, false, null, null, null, "memberWithdrawalList", null, false);
-    protected final ColumnInfo _columnWithdrawalReasonText = cci("WITHDRAWAL_REASON_TEXT", "WITHDRAWAL_REASON_TEXT", null, null, String.class, "withdrawalReasonText", null, false, false, true, "CLOB", 2147483647, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, null, Integer.class, "displayOrder", null, false, false, true, "INTEGER", 10, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnWithdrawalReasonCode = cci("WITHDRAWAL_REASON_CODE", "WITHDRAWAL_REASON_CODE", null, null, String.class, "withdrawalReasonCode", null, true, false, true, "CHAR", 3, 0, null, null, false, null, null, null, "memberWithdrawalList", null, false);
+    protected final ColumnInfo _columnWithdrawalReasonText = cci("WITHDRAWAL_REASON_TEXT", "WITHDRAWAL_REASON_TEXT", null, null, String.class, "withdrawalReasonText", null, false, false, true, "TEXT", 65535, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, null, Integer.class, "displayOrder", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)}
@@ -73,12 +75,12 @@ public class WithdrawalReasonDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnWithdrawalReasonCode() { return _columnWithdrawalReasonCode; }
     /**
-     * WITHDRAWAL_REASON_TEXT: {NotNull, CLOB(2147483647)}
+     * WITHDRAWAL_REASON_TEXT: {NotNull, TEXT(65535)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnWithdrawalReasonText() { return _columnWithdrawalReasonText; }
     /**
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnDisplayOrder() { return _columnDisplayOrder; }
@@ -103,6 +105,11 @@ public class WithdrawalReasonDbm extends AbstractDBMeta {
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() { return hpcui(columnDisplayOrder()); }
+
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
@@ -116,7 +123,7 @@ public class WithdrawalReasonDbm extends AbstractDBMeta {
     //                                     Referrer Property
     //                                     -----------------
     /**
-     * MEMBER_WITHDRAWAL by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
+     * member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerMemberWithdrawalList() {

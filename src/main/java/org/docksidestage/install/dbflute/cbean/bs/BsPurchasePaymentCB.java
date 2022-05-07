@@ -21,7 +21,7 @@ import org.docksidestage.install.dbflute.cbean.cq.*;
 import org.docksidestage.install.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of PURCHASE_PAYMENT.
+ * The base condition-bean of purchase_payment.
  * @author DBFlute(AutoGenerator)
  */
 public class BsPurchasePaymentCB extends AbstractConditionBean {
@@ -43,6 +43,13 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
         }
         if (DBFluteConfig.getInstance().isNonSpecifiedColumnAccessAllowed()) {
             enableNonSpecifiedColumnAccess();
+        }
+        if (DBFluteConfig.getInstance().isSpecifyColumnRequired()) {
+            enableSpecifyColumnRequired();
+        }
+        xsetSpecifyColumnRequiredExceptDeterminer(DBFluteConfig.getInstance().getSpecifyColumnRequiredExceptDeterminer());
+        if (DBFluteConfig.getInstance().isSpecifyColumnRequiredWarningOnly()) {
+            xenableSpecifyColumnRequiredWarningOnly();
         }
         if (DBFluteConfig.getInstance().isQueryUpdateCountPreCheck()) {
             enableQueryUpdateCountPreCheck();
@@ -70,7 +77,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "PURCHASE_PAYMENT";
+        return "purchase_payment";
     }
 
     // ===================================================================================
@@ -125,33 +132,33 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
      * <span style="color: #3F7E5E">// {fromDate &lt;= BIRTHDATE &lt; toDate + 1 day}</span>
      * cb.query().setBirthdate_IsNull();    <span style="color: #3F7E5E">// is null</span>
      * cb.query().setBirthdate_IsNotNull(); <span style="color: #3F7E5E">// is not null</span>
-     * 
+     *
      * <span style="color: #3F7E5E">// ExistsReferrer: (correlated sub-query)</span>
      * <span style="color: #3F7E5E">// {where exists (select PURCHASE_ID from PURCHASE where ...)}</span>
      * cb.query().existsPurchase(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * });
      * cb.query().notExistsPurchase...
-     * 
+     *
      * <span style="color: #3F7E5E">// (Query)DerivedReferrer: (correlated sub-query)</span>
      * cb.query().derivedPurchaseList().max(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.specify().columnPurchasePrice(); <span style="color: #3F7E5E">// derived column for function</span>
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * }).greaterEqual(value);
-     * 
+     *
      * <span style="color: #3F7E5E">// ScalarCondition: (self-table sub-query)</span>
      * cb.query().scalar_Equal().max(scalarCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     scalarCB.specify().columnBirthdate(); <span style="color: #3F7E5E">// derived column for function</span>
      *     scalarCB.query().set... <span style="color: #3F7E5E">// scalar sub-query condition</span>
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// OrderBy</span>
      * cb.query().addOrderBy_MemberName_Asc();
      * cb.query().addOrderBy_MemberName_Desc().withManualOrder(option);
      * cb.query().addOrderBy_MemberName_Desc().withNullsFirst();
      * cb.query().addOrderBy_MemberName_Desc().withNullsLast();
      * cb.query().addSpecifiedDerivedOrderBy_Desc(aliasName);
-     * 
+     *
      * <span style="color: #3F7E5E">// Query(Relation)</span>
      * cb.query().queryMemberStatus()...;
      * cb.query().queryMemberAddressAsValid(targetDate)...;
@@ -159,7 +166,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
     public PurchasePaymentCQ query() {
-        assertQueryPurpose(); // assert only when user-public query 
+        assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
@@ -210,7 +217,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
     public void union(UnionQuery<PurchasePaymentCB> unionCBLambda) {
-        final PurchasePaymentCB cb = new PurchasePaymentCB(); cb.xsetupForUnion(this); xsyncUQ(cb); 
+        final PurchasePaymentCB cb = new PurchasePaymentCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
         final PurchasePaymentCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
@@ -242,7 +249,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * PURCHASE by my PURCHASE_ID, named 'purchase'.
+     * purchase by my PURCHASE_ID, named 'purchase'.
      * <pre>
      * <span style="color: #0000C0">purchasePaymentBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Purchase()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -255,7 +262,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
      */
     public PurchaseNss setupSelect_Purchase() {
         assertSetupSelectPurpose("purchase");
-        if (hasSpecifiedColumn()) { // if reverse call
+        if (hasSpecifiedLocalColumn()) {
             specify().columnPurchaseId();
         }
         doSetupSelect(() -> query().queryPurchase());
@@ -300,8 +307,8 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
         return specify();
     }
 
-    public boolean hasSpecifiedColumn() {
-        return _specification != null && _specification.isAlreadySpecifiedRequiredColumn();
+    public boolean hasSpecifiedLocalColumn() {
+        return _specification != null && _specification.hasSpecifiedColumn();
     }
 
     public static class HpSpecification extends HpAbstractSpecification<PurchasePaymentCQ> {
@@ -316,7 +323,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPurchasePaymentId() { return doColumn("PURCHASE_PAYMENT_ID"); }
         /**
-         * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to PURCHASE}
+         * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnPurchaseId() { return doColumn("PURCHASE_ID"); }
@@ -326,7 +333,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPaymentAmount() { return doColumn("PAYMENT_AMOUNT"); }
         /**
-         * PAYMENT_DATETIME: {IX+, NotNull, TIMESTAMP(23, 10)}
+         * PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnPaymentDatetime() { return doColumn("PAYMENT_DATETIME"); }
@@ -336,7 +343,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPaymentMethodCode() { return doColumn("PAYMENT_METHOD_CODE"); }
         /**
-         * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+         * REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRegisterDatetime() { return doColumn("REGISTER_DATETIME"); }
@@ -346,7 +353,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnRegisterUser() { return doColumn("REGISTER_USER"); }
         /**
-         * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+         * UPDATE_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
@@ -366,10 +373,10 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "PURCHASE_PAYMENT"; }
+        protected String getTableDbName() { return "purchase_payment"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * PURCHASE by my PURCHASE_ID, named 'purchase'.
+         * purchase by my PURCHASE_ID, named 'purchase'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public PurchaseCB.HpSpecification specifyPurchase() {

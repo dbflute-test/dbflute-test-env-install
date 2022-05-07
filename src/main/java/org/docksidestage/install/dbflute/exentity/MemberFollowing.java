@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsMemberFollowing;
 
 /**
- * The entity of MEMBER_FOLLOWING.
+ * The entity of member_following.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

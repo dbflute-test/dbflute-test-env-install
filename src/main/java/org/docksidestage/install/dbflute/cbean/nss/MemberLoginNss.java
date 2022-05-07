@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.cbean.nss;
 import org.docksidestage.install.dbflute.cbean.cq.MemberLoginCQ;
 
 /**
- * The nest select set-upper of MEMBER_LOGIN.
+ * The nest select set-upper of member_login.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberLoginNss {
@@ -20,14 +20,14 @@ public class MemberLoginNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER_STATUS by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
+     * member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
      */
     public void withMemberStatus() {
         _query.xdoNss(() -> _query.queryMemberStatus());
     }
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER by my MEMBER_ID, named 'member'.
+     * member by my MEMBER_ID, named 'member'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberNss withMember() {

@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of MEMBER_SECURITY.
+ * The base condition-query of member_security.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
@@ -35,7 +35,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from MEMBER_SECURITY) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from member_security) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join MEMBER_SECURITY on ... and FOO = [value] ...}
+     * {select ... from ... left outer join member_security on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -79,16 +79,16 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _memberId; }
     protected ConditionValue xgetCValueMemberId() { return xdfgetMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -99,16 +99,16 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _loginPassword; }
     protected ConditionValue xgetCValueLoginPassword() { return xdfgetLoginPassword(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * LOGIN_PASSWORD: {NotNull, VARCHAR(50)}
+     * LOGIN_PASSWORD: {NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_LoginPassword_Asc() { regOBA("LOGIN_PASSWORD"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * LOGIN_PASSWORD: {NotNull, VARCHAR(50)}
+     * LOGIN_PASSWORD: {NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_LoginPassword_Desc() { regOBD("LOGIN_PASSWORD"); return this; }
@@ -119,7 +119,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _reminderQuestion; }
     protected ConditionValue xgetCValueReminderQuestion() { return xdfgetReminderQuestion(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REMINDER_QUESTION: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -139,7 +139,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _reminderAnswer; }
     protected ConditionValue xgetCValueReminderAnswer() { return xdfgetReminderAnswer(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REMINDER_ANSWER: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -159,16 +159,16 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _reminderUseCount; }
     protected ConditionValue xgetCValueReminderUseCount() { return xdfgetReminderUseCount(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
+     * REMINDER_USE_COUNT: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_ReminderUseCount_Asc() { regOBA("REMINDER_USE_COUNT"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
+     * REMINDER_USE_COUNT: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_ReminderUseCount_Desc() { regOBD("REMINDER_USE_COUNT"); return this; }
@@ -179,16 +179,16 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _registerDatetime; }
     protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -199,7 +199,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _registerUser; }
     protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -219,16 +219,16 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _updateDatetime; }
     protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberSecurityCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -239,7 +239,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _updateUser; }
     protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -259,7 +259,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
       return _versionNo; }
     protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * VERSION_NO: {NotNull, BIGINT(19)}
      * @return this. (NotNull)
@@ -324,7 +324,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER by my MEMBER_ID, named 'member'.
+     * member by my MEMBER_ID, named 'member'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMember() {
@@ -336,7 +336,7 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberCQ xcreateQueryMember() {
-        String nrp = xresolveNRP("MEMBER_SECURITY", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_security", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "member", nrp);
     }
     protected void xsetupOuterJoinMember() { xregOutJo("member"); }

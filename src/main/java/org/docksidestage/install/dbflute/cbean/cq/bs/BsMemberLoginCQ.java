@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of MEMBER_LOGIN.
+ * The base condition-query of member_login.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
@@ -35,7 +35,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from MEMBER_LOGIN) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from member_login) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join MEMBER_LOGIN on ... and FOO = [value] ...}
+     * {select ... from ... left outer join member_login on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -79,7 +79,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
       return _memberLoginId; }
     protected ConditionValue xgetCValueMemberLoginId() { return xdfgetMemberLoginId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * MEMBER_LOGIN_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return this. (NotNull)
@@ -99,16 +99,16 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
       return _memberId; }
     protected ConditionValue xgetCValueMemberId() { return xdfgetMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -119,16 +119,16 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
       return _loginDatetime; }
     protected ConditionValue xgetCValueLoginDatetime() { return xdfgetLoginDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * LOGIN_DATETIME: {+UQ, IX, NotNull, TIMESTAMP(23, 10)}
+     * LOGIN_DATETIME: {+UQ, IX, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_LoginDatetime_Asc() { regOBA("LOGIN_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * LOGIN_DATETIME: {+UQ, IX, NotNull, TIMESTAMP(23, 10)}
+     * LOGIN_DATETIME: {+UQ, IX, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_LoginDatetime_Desc() { regOBD("LOGIN_DATETIME"); return this; }
@@ -139,16 +139,16 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
       return _mobileLoginFlg; }
     protected ConditionValue xgetCValueMobileLoginFlg() { return xdfgetMobileLoginFlg(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MOBILE_LOGIN_FLG: {NotNull, INTEGER(10)}
+     * MOBILE_LOGIN_FLG: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_MobileLoginFlg_Asc() { regOBA("MOBILE_LOGIN_FLG"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MOBILE_LOGIN_FLG: {NotNull, INTEGER(10)}
+     * MOBILE_LOGIN_FLG: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_MobileLoginFlg_Desc() { regOBD("MOBILE_LOGIN_FLG"); return this; }
@@ -159,16 +159,16 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
       return _loginMemberStatusCode; }
     protected ConditionValue xgetCValueLoginMemberStatusCode() { return xdfgetLoginMemberStatusCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS}
+     * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_LoginMemberStatusCode_Asc() { regOBA("LOGIN_MEMBER_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS}
+     * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status}
      * @return this. (NotNull)
      */
     public BsMemberLoginCQ addOrderBy_LoginMemberStatusCode_Desc() { regOBD("LOGIN_MEMBER_STATUS_CODE"); return this; }
@@ -227,7 +227,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER_STATUS by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
+     * member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberStatusCQ queryMemberStatus() {
@@ -239,7 +239,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberStatusCQ xcreateQueryMemberStatus() {
-        String nrp = xresolveNRP("MEMBER_LOGIN", "memberStatus"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_login", "memberStatus"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberStatusCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberStatus", nrp);
     }
     protected void xsetupOuterJoinMemberStatus() { xregOutJo("memberStatus"); }
@@ -247,7 +247,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER by my MEMBER_ID, named 'member'.
+     * member by my MEMBER_ID, named 'member'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMember() {
@@ -259,7 +259,7 @@ public class BsMemberLoginCQ extends AbstractBsMemberLoginCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberCQ xcreateQueryMember() {
-        String nrp = xresolveNRP("MEMBER_LOGIN", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_login", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "member", nrp);
     }
     protected void xsetupOuterJoinMember() { xregOutJo("member"); }

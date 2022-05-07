@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of SERVICE_RANK as TABLE. <br>
+ * The behavior of service_rank as TABLE. <br>
  * <pre>
  * [primary key]
  *     SERVICE_RANK_CODE
@@ -41,7 +43,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     MEMBER_SERVICE
+ *     member_service
  *
  * [foreign property]
  *     
@@ -65,7 +67,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
     /** {@inheritDoc} */
     public ServiceRankDbm asDBMeta() { return ServiceRankDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "SERVICE_RANK"; }
+    public String asTableDbName() { return "service_rank"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">serviceRank</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -186,7 +188,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
 
     /**
      * Select the entity by the unique-key value.
-     * @param displayOrder : UQ, NotNull, INTEGER(10). (NotNull)
+     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -315,7 +317,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -386,7 +388,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br>
-     * MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #CC4747">loadMemberService</span>(<span style="color: #553000">serviceRankList</span>, <span style="color: #553000">serviceCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">serviceCB</span>.setupSelect...
@@ -417,7 +419,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br>
-     * MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #CC4747">loadMemberService</span>(<span style="color: #553000">serviceRank</span>, <span style="color: #553000">serviceCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">serviceCB</span>.setupSelect...
@@ -893,8 +895,8 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * serviceRankBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * serviceRankBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * serviceRankBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * serviceRankBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * serviceRankBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -902,7 +904,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
      * serviceRankBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * serviceRankBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * serviceRankBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * serviceRankBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * serviceRankBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -910,7 +912,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
      * serviceRankBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * serviceRankBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * serviceRankBhv.outideSql().removeBlockComment().selectList()
      * serviceRankBhv.outideSql().removeLineComment().selectList()
      * serviceRankBhv.outideSql().formatSql().selectList()
@@ -928,4 +930,25 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
     protected Class<? extends ServiceRank> typeOfSelectedEntity() { return ServiceRank.class; }
     protected Class<ServiceRank> typeOfHandlingEntity() { return ServiceRank.class; }
     protected Class<ServiceRankCB> typeOfHandlingConditionBean() { return ServiceRankCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsProductStatus;
 
 /**
- * The entity of PRODUCT_STATUS.
+ * The entity of product_status.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

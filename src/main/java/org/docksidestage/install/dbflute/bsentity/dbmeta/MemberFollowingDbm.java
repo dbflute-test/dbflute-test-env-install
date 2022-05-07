@@ -14,7 +14,7 @@ import org.docksidestage.install.dbflute.allcommon.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The DB meta of MEMBER_FOLLOWING. (Singleton)
+ * The DB meta of member_following. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class MemberFollowingDbm extends AbstractDBMeta {
@@ -67,21 +67,23 @@ public class MemberFollowingDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "MEMBER_FOLLOWING";
+    protected final String _tableDbName = "member_following";
+    protected final String _tableDispName = "member_following";
     protected final String _tablePropertyName = "memberFollowing";
-    protected final TableSqlName _tableSqlName = new TableSqlName("MEMBER_FOLLOWING", _tableDbName);
+    protected final TableSqlName _tableSqlName = new TableSqlName("member_following", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
+    public String getTableDispName() { return _tableDispName; }
     public String getTablePropertyName() { return _tablePropertyName; }
     public TableSqlName getTableSqlName() { return _tableSqlName; }
 
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberFollowingId = cci("MEMBER_FOLLOWING_ID", "MEMBER_FOLLOWING_ID", null, null, Long.class, "memberFollowingId", null, true, true, true, "BIGINT", 19, 0, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_5654528E_5E2B_4363_BDE2_500CEA4A98F1", false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnMyMemberId = cci("MY_MEMBER_ID", "MY_MEMBER_ID", null, null, Integer.class, "myMemberId", null, false, false, true, "INTEGER", 10, 0, null, false, null, null, "memberByMyMemberId", null, null, false);
-    protected final ColumnInfo _columnYourMemberId = cci("YOUR_MEMBER_ID", "YOUR_MEMBER_ID", null, null, Integer.class, "yourMemberId", null, false, false, true, "INTEGER", 10, 0, null, false, null, null, "memberByYourMemberId", null, null, false);
-    protected final ColumnInfo _columnFollowDatetime = cci("FOLLOW_DATETIME", "FOLLOW_DATETIME", null, null, java.time.LocalDateTime.class, "followDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnMemberFollowingId = cci("MEMBER_FOLLOWING_ID", "MEMBER_FOLLOWING_ID", null, null, Long.class, "memberFollowingId", null, true, true, true, "BIGINT", 19, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnMyMemberId = cci("MY_MEMBER_ID", "MY_MEMBER_ID", null, null, Integer.class, "myMemberId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "memberByMyMemberId", null, null, false);
+    protected final ColumnInfo _columnYourMemberId = cci("YOUR_MEMBER_ID", "YOUR_MEMBER_ID", null, null, Integer.class, "yourMemberId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "memberByYourMemberId", null, null, false);
+    protected final ColumnInfo _columnFollowDatetime = cci("FOLLOW_DATETIME", "FOLLOW_DATETIME", null, null, java.time.LocalDateTime.class, "followDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * MEMBER_FOLLOWING_ID: {PK, ID, NotNull, BIGINT(19)}
@@ -89,17 +91,17 @@ public class MemberFollowingDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberFollowingId() { return _columnMemberFollowingId; }
     /**
-     * MY_MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER}
+     * MY_MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMyMemberId() { return _columnMyMemberId; }
     /**
-     * YOUR_MEMBER_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to MEMBER}
+     * YOUR_MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnYourMemberId() { return _columnYourMemberId; }
     /**
-     * FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * FOLLOW_DATETIME: {IX, NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnFollowDatetime() { return _columnFollowDatetime; }
@@ -125,6 +127,16 @@ public class MemberFollowingDbm extends AbstractDBMeta {
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() {
+        List<ColumnInfo> ls = newArrayListSized(4);
+        ls.add(columnMyMemberId());
+        ls.add(columnYourMemberId());
+        return hpcui(ls);
+    }
+
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
@@ -134,20 +146,20 @@ public class MemberFollowingDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * MEMBER by my MY_MEMBER_ID, named 'memberByMyMemberId'.
+     * member by my MY_MEMBER_ID, named 'memberByMyMemberId'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignMemberByMyMemberId() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMyMemberId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_FOLLOWING_MY_MEMBER", "memberByMyMemberId", this, MemberDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberFollowingByMyMemberIdList", false);
+        return cfi("FK_MEMBER_FOLLOWING_MY_MEMBER_ID", "memberByMyMemberId", this, MemberDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberFollowingByMyMemberIdList", false);
     }
     /**
-     * MEMBER by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
+     * member by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignMemberByYourMemberId() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnYourMemberId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_FOLLOWING_YOUR_MEMBER", "memberByYourMemberId", this, MemberDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberFollowingByYourMemberIdList", false);
+        return cfi("FK_MEMBER_FOLLOWING_YOUR_MEMBER_ID", "memberByYourMemberId", this, MemberDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberFollowingByYourMemberIdList", false);
     }
 
     // -----------------------------------------------------

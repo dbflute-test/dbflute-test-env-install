@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsPurchaseCQ;
 
 /**
- * The condition-query of PURCHASE.
+ * The condition-query of purchase.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

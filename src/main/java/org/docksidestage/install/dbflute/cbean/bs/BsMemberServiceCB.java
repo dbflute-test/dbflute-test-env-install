@@ -21,7 +21,7 @@ import org.docksidestage.install.dbflute.cbean.cq.*;
 import org.docksidestage.install.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of MEMBER_SERVICE.
+ * The base condition-bean of member_service.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberServiceCB extends AbstractConditionBean {
@@ -43,6 +43,13 @@ public class BsMemberServiceCB extends AbstractConditionBean {
         }
         if (DBFluteConfig.getInstance().isNonSpecifiedColumnAccessAllowed()) {
             enableNonSpecifiedColumnAccess();
+        }
+        if (DBFluteConfig.getInstance().isSpecifyColumnRequired()) {
+            enableSpecifyColumnRequired();
+        }
+        xsetSpecifyColumnRequiredExceptDeterminer(DBFluteConfig.getInstance().getSpecifyColumnRequiredExceptDeterminer());
+        if (DBFluteConfig.getInstance().isSpecifyColumnRequiredWarningOnly()) {
+            xenableSpecifyColumnRequiredWarningOnly();
         }
         if (DBFluteConfig.getInstance().isQueryUpdateCountPreCheck()) {
             enableQueryUpdateCountPreCheck();
@@ -70,7 +77,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "MEMBER_SERVICE";
+        return "member_service";
     }
 
     // ===================================================================================
@@ -78,7 +85,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberServiceId : PK, ID, NotNull, INTEGER(10). (NotNull)
+     * @param memberServiceId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
     public MemberServiceCB acceptPK(Integer memberServiceId) {
@@ -90,7 +97,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param memberId : UQ, IX, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
+     * @param memberId : UQ, NotNull, INT(10), FK to member. (NotNull)
      * @return this. (NotNull)
      */
     public MemberServiceCB acceptUniqueOf(Integer memberId) {
@@ -137,33 +144,33 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      * <span style="color: #3F7E5E">// {fromDate &lt;= BIRTHDATE &lt; toDate + 1 day}</span>
      * cb.query().setBirthdate_IsNull();    <span style="color: #3F7E5E">// is null</span>
      * cb.query().setBirthdate_IsNotNull(); <span style="color: #3F7E5E">// is not null</span>
-     * 
+     *
      * <span style="color: #3F7E5E">// ExistsReferrer: (correlated sub-query)</span>
      * <span style="color: #3F7E5E">// {where exists (select PURCHASE_ID from PURCHASE where ...)}</span>
      * cb.query().existsPurchase(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * });
      * cb.query().notExistsPurchase...
-     * 
+     *
      * <span style="color: #3F7E5E">// (Query)DerivedReferrer: (correlated sub-query)</span>
      * cb.query().derivedPurchaseList().max(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.specify().columnPurchasePrice(); <span style="color: #3F7E5E">// derived column for function</span>
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * }).greaterEqual(value);
-     * 
+     *
      * <span style="color: #3F7E5E">// ScalarCondition: (self-table sub-query)</span>
      * cb.query().scalar_Equal().max(scalarCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     scalarCB.specify().columnBirthdate(); <span style="color: #3F7E5E">// derived column for function</span>
      *     scalarCB.query().set... <span style="color: #3F7E5E">// scalar sub-query condition</span>
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// OrderBy</span>
      * cb.query().addOrderBy_MemberName_Asc();
      * cb.query().addOrderBy_MemberName_Desc().withManualOrder(option);
      * cb.query().addOrderBy_MemberName_Desc().withNullsFirst();
      * cb.query().addOrderBy_MemberName_Desc().withNullsLast();
      * cb.query().addSpecifiedDerivedOrderBy_Desc(aliasName);
-     * 
+     *
      * <span style="color: #3F7E5E">// Query(Relation)</span>
      * cb.query().queryMemberStatus()...;
      * cb.query().queryMemberAddressAsValid(targetDate)...;
@@ -171,7 +178,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
     public MemberServiceCQ query() {
-        assertQueryPurpose(); // assert only when user-public query 
+        assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
@@ -222,7 +229,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
     public void union(UnionQuery<MemberServiceCB> unionCBLambda) {
-        final MemberServiceCB cb = new MemberServiceCB(); cb.xsetupForUnion(this); xsyncUQ(cb); 
+        final MemberServiceCB cb = new MemberServiceCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
         final MemberServiceCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
@@ -254,7 +261,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * MEMBER by my MEMBER_ID, named 'member'.
+     * member by my MEMBER_ID, named 'member'.
      * <pre>
      * <span style="color: #0000C0">memberServiceBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -267,7 +274,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      */
     public MemberNss setupSelect_Member() {
         assertSetupSelectPurpose("member");
-        if (hasSpecifiedColumn()) { // if reverse call
+        if (hasSpecifiedLocalColumn()) {
             specify().columnMemberId();
         }
         doSetupSelect(() -> query().queryMember());
@@ -278,7 +285,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
 
     /**
      * Set up relation columns to select clause. <br>
-     * SERVICE_RANK by my SERVICE_RANK_CODE, named 'serviceRank'.
+     * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
      * <pre>
      * <span style="color: #0000C0">memberServiceBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_ServiceRank()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -290,7 +297,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      */
     public void setupSelect_ServiceRank() {
         assertSetupSelectPurpose("serviceRank");
-        if (hasSpecifiedColumn()) { // if reverse call
+        if (hasSpecifiedLocalColumn()) {
             specify().columnServiceRankCode();
         }
         doSetupSelect(() -> query().queryServiceRank());
@@ -332,8 +339,8 @@ public class BsMemberServiceCB extends AbstractConditionBean {
         return specify();
     }
 
-    public boolean hasSpecifiedColumn() {
-        return _specification != null && _specification.isAlreadySpecifiedRequiredColumn();
+    public boolean hasSpecifiedLocalColumn() {
+        return _specification != null && _specification.hasSpecifiedColumn();
     }
 
     public static class HpSpecification extends HpAbstractSpecification<MemberServiceCQ> {
@@ -344,27 +351,27 @@ public class BsMemberServiceCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * MEMBER_SERVICE_ID: {PK, ID, NotNull, INTEGER(10)}
+         * MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMemberServiceId() { return doColumn("MEMBER_SERVICE_ID"); }
         /**
-         * MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER}
+         * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * SERVICE_POINT_COUNT: {IX, NotNull, INTEGER(10)}
+         * SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnServicePointCount() { return doColumn("SERVICE_POINT_COUNT"); }
         /**
-         * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to SERVICE_RANK}
+         * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }
         /**
-         * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+         * REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRegisterDatetime() { return doColumn("REGISTER_DATETIME"); }
@@ -374,7 +381,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnRegisterUser() { return doColumn("REGISTER_USER"); }
         /**
-         * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+         * UPDATE_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
@@ -403,10 +410,10 @@ public class BsMemberServiceCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "MEMBER_SERVICE"; }
+        protected String getTableDbName() { return "member_service"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * MEMBER by my MEMBER_ID, named 'member'.
+         * member by my MEMBER_ID, named 'member'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMember() {
@@ -426,7 +433,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * SERVICE_RANK by my SERVICE_RANK_CODE, named 'serviceRank'.
+         * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public ServiceRankCB.HpSpecification specifyServiceRank() {

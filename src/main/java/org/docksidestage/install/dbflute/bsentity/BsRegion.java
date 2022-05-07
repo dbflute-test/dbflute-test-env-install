@@ -10,35 +10,37 @@ import org.docksidestage.install.dbflute.allcommon.DBMetaInstanceHandler;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The entity of REGION as TABLE. <br>
+ * The entity of region as TABLE. <br>
+ * 地域 : 主に会員の住所に対応する漠然とした地域。<br>
+ * かなりざっくりした感じではある。唯一の業務的one-to-oneの親テーブルのケース。
  * <pre>
  * [primary-key]
  *     REGION_ID
- * 
+ *
  * [column]
  *     REGION_ID, REGION_NAME
- * 
+ *
  * [sequence]
  *     
- * 
+ *
  * [identity]
  *     
- * 
+ *
  * [version-no]
  *     
- * 
+ *
  * [foreign table]
  *     
- * 
+ *
  * [referrer table]
- *     MEMBER_ADDRESS
- * 
+ *     member_address
+ *
  * [foreign property]
  *     
- * 
+ *
  * [referrer property]
  *     memberAddressList
- * 
+ *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer regionId = entity.getRegionId();
@@ -60,7 +62,7 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** REGION_ID: {PK, NotNull, INTEGER(10)} */
+    /** REGION_ID: {PK, NotNull, INT(10)} */
     protected Integer _regionId;
 
     /** REGION_NAME: {NotNull, VARCHAR(50)} */
@@ -76,12 +78,12 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
 
     /** {@inheritDoc} */
     public String asTableDbName() {
-        return "REGION";
+        return "region";
     }
 
     // ===================================================================================
-    //                                                                         Primary Key
-    //                                                                         ===========
+    //                                                                        Key Handling
+    //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
         if (_regionId == null) { return false; }
@@ -94,11 +96,11 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** MEMBER_ADDRESS by REGION_ID, named 'memberAddressList'. */
+    /** member_address by REGION_ID, named 'memberAddressList'. */
     protected List<MemberAddress> _memberAddressList;
 
     /**
-     * [get] MEMBER_ADDRESS by REGION_ID, named 'memberAddressList'.
+     * [get] member_address by REGION_ID, named 'memberAddressList'.
      * @return The entity list of referrer property 'memberAddressList'. (NotNull: even if no loading, returns empty list)
      */
     public List<MemberAddress> getMemberAddressList() {
@@ -107,14 +109,14 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] MEMBER_ADDRESS by REGION_ID, named 'memberAddressList'.
+     * [set] member_address by REGION_ID, named 'memberAddressList'.
      * @param memberAddressList The entity list of referrer property 'memberAddressList'. (NullAllowed)
      */
     public void setMemberAddressList(List<MemberAddress> memberAddressList) {
         _memberAddressList = memberAddressList;
     }
 
-    protected <ELEMENT> List<ELEMENT> newReferrerList() {
+    protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
 
@@ -180,7 +182,9 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] REGION_ID: {PK, NotNull, INTEGER(10)} <br>
+     * [get] REGION_ID: {PK, NotNull, INT(10)} <br>
+     * 地域ID : 地域をしっかりと識別するID。<br>
+     * 珍しく(固定的な)マスタテーブルとしては数値だが、Exampleなのでやはり色々なパターンがないとね、ってところで。
      * @return The value of the column 'REGION_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getRegionId() {
@@ -189,7 +193,9 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] REGION_ID: {PK, NotNull, INTEGER(10)} <br>
+     * [set] REGION_ID: {PK, NotNull, INT(10)} <br>
+     * 地域ID : 地域をしっかりと識別するID。<br>
+     * 珍しく(固定的な)マスタテーブルとしては数値だが、Exampleなのでやはり色々なパターンがないとね、ってところで。
      * @param regionId The value of the column 'REGION_ID'. (basically NotNull if update: for the constraint)
      */
     public void setRegionId(Integer regionId) {
@@ -199,6 +205,7 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
 
     /**
      * [get] REGION_NAME: {NotNull, VARCHAR(50)} <br>
+     * 地域名称 : 地域を漠然と表す名称。
      * @return The value of the column 'REGION_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getRegionName() {
@@ -208,6 +215,7 @@ public abstract class BsRegion extends AbstractEntity implements DomainEntity {
 
     /**
      * [set] REGION_NAME: {NotNull, VARCHAR(50)} <br>
+     * 地域名称 : 地域を漠然と表す名称。
      * @param regionName The value of the column 'REGION_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setRegionName(String regionName) {

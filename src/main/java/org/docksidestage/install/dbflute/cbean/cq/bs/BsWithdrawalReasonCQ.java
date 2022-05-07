@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of WITHDRAWAL_REASON.
+ * The base condition-query of withdrawal_reason.
  * @author DBFlute(AutoGenerator)
  */
 public class BsWithdrawalReasonCQ extends AbstractBsWithdrawalReasonCQ {
@@ -35,7 +35,7 @@ public class BsWithdrawalReasonCQ extends AbstractBsWithdrawalReasonCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from WITHDRAWAL_REASON) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from withdrawal_reason) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsWithdrawalReasonCQ extends AbstractBsWithdrawalReasonCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join WITHDRAWAL_REASON on ... and FOO = [value] ...}
+     * {select ... from ... left outer join withdrawal_reason on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -93,7 +93,7 @@ public class BsWithdrawalReasonCQ extends AbstractBsWithdrawalReasonCQ {
     public Map<String, Object> xdfgetWithdrawalReasonCode_QueryDerivedReferrer_MemberWithdrawalListParameter() { return xgetSQuePmMap("withdrawalReasonCode_QueryDerivedReferrer_MemberWithdrawalList"); }
     public String keepWithdrawalReasonCode_QueryDerivedReferrer_MemberWithdrawalListParameter(Object pm) { return xkeepSQuePm("withdrawalReasonCode_QueryDerivedReferrer_MemberWithdrawalList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
@@ -113,16 +113,16 @@ public class BsWithdrawalReasonCQ extends AbstractBsWithdrawalReasonCQ {
       return _withdrawalReasonText; }
     protected ConditionValue xgetCValueWithdrawalReasonText() { return xdfgetWithdrawalReasonText(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * WITHDRAWAL_REASON_TEXT: {NotNull, CLOB(2147483647)}
+     * WITHDRAWAL_REASON_TEXT: {NotNull, TEXT(65535)}
      * @return this. (NotNull)
      */
     public BsWithdrawalReasonCQ addOrderBy_WithdrawalReasonText_Asc() { regOBA("WITHDRAWAL_REASON_TEXT"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * WITHDRAWAL_REASON_TEXT: {NotNull, CLOB(2147483647)}
+     * WITHDRAWAL_REASON_TEXT: {NotNull, TEXT(65535)}
      * @return this. (NotNull)
      */
     public BsWithdrawalReasonCQ addOrderBy_WithdrawalReasonText_Desc() { regOBD("WITHDRAWAL_REASON_TEXT"); return this; }
@@ -133,16 +133,16 @@ public class BsWithdrawalReasonCQ extends AbstractBsWithdrawalReasonCQ {
       return _displayOrder; }
     protected ConditionValue xgetCValueDisplayOrder() { return xdfgetDisplayOrder(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsWithdrawalReasonCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsWithdrawalReasonCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }

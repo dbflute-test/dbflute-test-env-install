@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsMemberServiceCQ;
 
 /**
- * The condition-query of MEMBER_SERVICE.
+ * The condition-query of member_service.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

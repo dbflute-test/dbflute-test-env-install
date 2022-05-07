@@ -9,7 +9,7 @@ import org.docksidestage.install.dbflute.exentity.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The referrer loader of SERVICE_RANK as TABLE. <br>
+ * The referrer loader of service_rank as TABLE. <br>
  * <pre>
  * [primary key]
  *     SERVICE_RANK_CODE
@@ -30,7 +30,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     MEMBER_SERVICE
+ *     member_service
  *
  * [foreign property]
  *     
@@ -65,7 +65,7 @@ public class LoaderOfServiceRank {
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br>
-     * MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">serviceRankList</span>, <span style="color: #553000">rankLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">rankLoader</span>.<span style="color: #CC4747">loadMemberService</span>(<span style="color: #553000">serviceCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

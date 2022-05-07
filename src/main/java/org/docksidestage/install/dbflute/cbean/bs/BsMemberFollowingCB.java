@@ -21,7 +21,7 @@ import org.docksidestage.install.dbflute.cbean.cq.*;
 import org.docksidestage.install.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of MEMBER_FOLLOWING.
+ * The base condition-bean of member_following.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberFollowingCB extends AbstractConditionBean {
@@ -43,6 +43,13 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
         }
         if (DBFluteConfig.getInstance().isNonSpecifiedColumnAccessAllowed()) {
             enableNonSpecifiedColumnAccess();
+        }
+        if (DBFluteConfig.getInstance().isSpecifyColumnRequired()) {
+            enableSpecifyColumnRequired();
+        }
+        xsetSpecifyColumnRequiredExceptDeterminer(DBFluteConfig.getInstance().getSpecifyColumnRequiredExceptDeterminer());
+        if (DBFluteConfig.getInstance().isSpecifyColumnRequiredWarningOnly()) {
+            xenableSpecifyColumnRequiredWarningOnly();
         }
         if (DBFluteConfig.getInstance().isQueryUpdateCountPreCheck()) {
             enableQueryUpdateCountPreCheck();
@@ -70,7 +77,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "MEMBER_FOLLOWING";
+        return "member_following";
     }
 
     // ===================================================================================
@@ -90,8 +97,8 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param myMemberId : UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
-     * @param yourMemberId : +UQ, IX+, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
+     * @param myMemberId : UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param yourMemberId : +UQ, IX, NotNull, INT(10), FK to member. (NotNull)
      * @return this. (NotNull)
      */
     public MemberFollowingCB acceptUniqueOf(Integer myMemberId, Integer yourMemberId) {
@@ -138,33 +145,33 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
      * <span style="color: #3F7E5E">// {fromDate &lt;= BIRTHDATE &lt; toDate + 1 day}</span>
      * cb.query().setBirthdate_IsNull();    <span style="color: #3F7E5E">// is null</span>
      * cb.query().setBirthdate_IsNotNull(); <span style="color: #3F7E5E">// is not null</span>
-     * 
+     *
      * <span style="color: #3F7E5E">// ExistsReferrer: (correlated sub-query)</span>
      * <span style="color: #3F7E5E">// {where exists (select PURCHASE_ID from PURCHASE where ...)}</span>
      * cb.query().existsPurchase(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * });
      * cb.query().notExistsPurchase...
-     * 
+     *
      * <span style="color: #3F7E5E">// (Query)DerivedReferrer: (correlated sub-query)</span>
      * cb.query().derivedPurchaseList().max(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.specify().columnPurchasePrice(); <span style="color: #3F7E5E">// derived column for function</span>
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * }).greaterEqual(value);
-     * 
+     *
      * <span style="color: #3F7E5E">// ScalarCondition: (self-table sub-query)</span>
      * cb.query().scalar_Equal().max(scalarCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     scalarCB.specify().columnBirthdate(); <span style="color: #3F7E5E">// derived column for function</span>
      *     scalarCB.query().set... <span style="color: #3F7E5E">// scalar sub-query condition</span>
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// OrderBy</span>
      * cb.query().addOrderBy_MemberName_Asc();
      * cb.query().addOrderBy_MemberName_Desc().withManualOrder(option);
      * cb.query().addOrderBy_MemberName_Desc().withNullsFirst();
      * cb.query().addOrderBy_MemberName_Desc().withNullsLast();
      * cb.query().addSpecifiedDerivedOrderBy_Desc(aliasName);
-     * 
+     *
      * <span style="color: #3F7E5E">// Query(Relation)</span>
      * cb.query().queryMemberStatus()...;
      * cb.query().queryMemberAddressAsValid(targetDate)...;
@@ -172,7 +179,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
     public MemberFollowingCQ query() {
-        assertQueryPurpose(); // assert only when user-public query 
+        assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
@@ -223,7 +230,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
     public void union(UnionQuery<MemberFollowingCB> unionCBLambda) {
-        final MemberFollowingCB cb = new MemberFollowingCB(); cb.xsetupForUnion(this); xsyncUQ(cb); 
+        final MemberFollowingCB cb = new MemberFollowingCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
         final MemberFollowingCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
@@ -255,7 +262,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * MEMBER by my MY_MEMBER_ID, named 'memberByMyMemberId'.
+     * member by my MY_MEMBER_ID, named 'memberByMyMemberId'.
      * <pre>
      * <span style="color: #0000C0">memberFollowingBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_MemberByMyMemberId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -268,7 +275,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
      */
     public MemberNss setupSelect_MemberByMyMemberId() {
         assertSetupSelectPurpose("memberByMyMemberId");
-        if (hasSpecifiedColumn()) { // if reverse call
+        if (hasSpecifiedLocalColumn()) {
             specify().columnMyMemberId();
         }
         doSetupSelect(() -> query().queryMemberByMyMemberId());
@@ -284,7 +291,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * MEMBER by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
+     * member by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
      * <pre>
      * <span style="color: #0000C0">memberFollowingBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_MemberByYourMemberId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -297,7 +304,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
      */
     public MemberNss setupSelect_MemberByYourMemberId() {
         assertSetupSelectPurpose("memberByYourMemberId");
-        if (hasSpecifiedColumn()) { // if reverse call
+        if (hasSpecifiedLocalColumn()) {
             specify().columnYourMemberId();
         }
         doSetupSelect(() -> query().queryMemberByYourMemberId());
@@ -342,8 +349,8 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
         return specify();
     }
 
-    public boolean hasSpecifiedColumn() {
-        return _specification != null && _specification.isAlreadySpecifiedRequiredColumn();
+    public boolean hasSpecifiedLocalColumn() {
+        return _specification != null && _specification.hasSpecifiedColumn();
     }
 
     public static class HpSpecification extends HpAbstractSpecification<MemberFollowingCQ> {
@@ -359,17 +366,17 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnMemberFollowingId() { return doColumn("MEMBER_FOLLOWING_ID"); }
         /**
-         * MY_MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER}
+         * MY_MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMyMemberId() { return doColumn("MY_MEMBER_ID"); }
         /**
-         * YOUR_MEMBER_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to MEMBER}
+         * YOUR_MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnYourMemberId() { return doColumn("YOUR_MEMBER_ID"); }
         /**
-         * FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+         * FOLLOW_DATETIME: {IX, NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnFollowDatetime() { return doColumn("FOLLOW_DATETIME"); }
@@ -388,10 +395,10 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "MEMBER_FOLLOWING"; }
+        protected String getTableDbName() { return "member_following"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * MEMBER by my MY_MEMBER_ID, named 'memberByMyMemberId'.
+         * member by my MY_MEMBER_ID, named 'memberByMyMemberId'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMemberByMyMemberId() {
@@ -411,7 +418,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * MEMBER by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
+         * member by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMemberByYourMemberId() {

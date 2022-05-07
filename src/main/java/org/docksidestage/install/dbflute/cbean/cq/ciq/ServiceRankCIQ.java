@@ -12,7 +12,7 @@ import org.docksidestage.install.dbflute.cbean.cq.bs.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of SERVICE_RANK.
+ * The condition-query for in-line of service_rank.
  * @author DBFlute(AutoGenerator)
  */
 public class ServiceRankCIQ extends AbstractBsServiceRankCQ {

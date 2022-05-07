@@ -39,7 +39,7 @@ public class ImplementedInvokerAssistant implements InvokerAssistant {
     //                                                                           Attribute
     //                                                                           =========
     protected static final String[] DEFAULT_CLIENT_INVOKE_NAMES
-        = new String[] { "Page", "Action", "Controller", "ControllerImpl", "Task", "Test" };
+        = new String[] { "Page", "Action", "Controller", "ControllerImpl", "Job", "Task", "Test" };
 
     protected static final String[] DEFAULT_BYPASS_INVOKE_NAMES
         = new String[] { "Service", "ServiceImpl", "Facade", "FacadeImpl", "Logic", "LogicImpl" };
@@ -487,8 +487,7 @@ public class ImplementedInvokerAssistant implements InvokerAssistant {
     // to check the initializer is an instance of DBFluteInitializer
     // when the initializer is extended by DBFlute property
     // so this variable is actually unused in this class
-    // (needs to be injected only when the DI container
-    // is set by its DI setting file)
+    // (needs to be injected only when the DI container is set by its DI setting file)
     public void setIntroduction(DBFluteInitializer introduction) {
         _introduction = introduction;
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,13 +22,13 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of MEMBER_WITHDRAWAL as TABLE. <br>
+ * The behavior of member_withdrawal as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, WITHDRAWAL_REASON_CODE, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, WITHDRAWAL_REASON_CODE, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER
  *
  * [sequence]
  *     
@@ -35,10 +37,10 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [version-no]
- *     VERSION_NO
+ *     
  *
  * [foreign table]
- *     MEMBER, WITHDRAWAL_REASON
+ *     member, withdrawal_reason
  *
  * [referrer table]
  *     
@@ -65,7 +67,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     /** {@inheritDoc} */
     public MemberWithdrawalDbm asDBMeta() { return MemberWithdrawalDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "MEMBER_WITHDRAWAL"; }
+    public String asTableDbName() { return "member_withdrawal"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">memberWithdrawal</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -157,7 +159,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId : PK, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
+     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -290,7 +292,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -414,7 +416,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Update the entity modified-only. (ZeroUpdateException, ExclusiveControl) <br>
+     * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
      * MemberWithdrawal memberWithdrawal = <span style="color: #70226C">new</span> MemberWithdrawal();
@@ -427,8 +429,8 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      * memberWithdrawal.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">update</span>(memberWithdrawal);
      * </pre>
-     * @param memberWithdrawal The entity of update. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
-     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @param memberWithdrawal The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -437,35 +439,11 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Update the entity non-strictly modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
-     * By PK as default, and also you can update by unique keys using entity's uniqueOf().
-     * <pre>
-     * MemberWithdrawal memberWithdrawal = <span style="color: #70226C">new</span> MemberWithdrawal();
-     * memberWithdrawal.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * memberWithdrawal.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
-     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//memberWithdrawal.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//memberWithdrawal.set...;</span>
-     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
-     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//memberWithdrawal.setVersionNo(value);</span>
-     * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">updateNonstrict</span>(memberWithdrawal);
-     * </pre>
-     * @param memberWithdrawal The entity of update. (NotNull, PrimaryKeyNotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
-     */
-    public void updateNonstrict(MemberWithdrawal memberWithdrawal) {
-        doUpdateNonstrict(memberWithdrawal, null);
-    }
-
-    /**
-     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, ExclusiveControl) <br>
+     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
      * @param memberWithdrawal The entity of insert or update. (NotNull, ...depends on insert or update)
-     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -474,20 +452,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Insert or update the entity non-strictly modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
-     * if (the entity has no PK) { insert() } else { update(), but no data, insert() }
-     * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
-     * @param memberWithdrawal The entity of insert or update. (NotNull, ...depends on insert or update)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
-     */
-    public void insertOrUpdateNonstrict(MemberWithdrawal memberWithdrawal) {
-        doInsertOrUpdateNonstrict(memberWithdrawal, null, null);
-    }
-
-    /**
-     * Delete the entity. (ZeroUpdateException, ExclusiveControl) <br>
+     * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
      * MemberWithdrawal memberWithdrawal = <span style="color: #70226C">new</span> MemberWithdrawal();
@@ -500,31 +465,12 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      *     ...
      * }
      * </pre>
-     * @param memberWithdrawal The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
-     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     */
-    public void delete(MemberWithdrawal memberWithdrawal) {
-        doDelete(memberWithdrawal, null);
-    }
-
-    /**
-     * Delete the entity non-strictly. {ZeroUpdateException, NonExclusiveControl} <br>
-     * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
-     * <pre>
-     * MemberWithdrawal memberWithdrawal = <span style="color: #70226C">new</span> MemberWithdrawal();
-     * memberWithdrawal.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
-     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//memberWithdrawal.setVersionNo(value);</span>
-     * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">deleteNonstrict</span>(memberWithdrawal);
-     * </pre>
      * @param memberWithdrawal The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void deleteNonstrict(MemberWithdrawal memberWithdrawal) {
-        doDeleteNonstrict(memberWithdrawal, null);
+    public void delete(MemberWithdrawal memberWithdrawal) {
+        doDelete(memberWithdrawal, null);
     }
 
     // ===================================================================================
@@ -559,7 +505,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Batch-update the entity list modified-only of same-set columns. (ExclusiveControl) <br>
+     * Batch-update the entity list modified-only of same-set columns. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement. <br>
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
@@ -578,62 +524,23 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      * }
      * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">batchUpdate</span>(memberWithdrawalList);
      * </pre>
-     * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
-     * @throws BatchEntityAlreadyUpdatedException When the entity has already been updated. This exception extends EntityAlreadyUpdatedException.
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
     public int[] batchUpdate(List<MemberWithdrawal> memberWithdrawalList) {
         return doBatchUpdate(memberWithdrawalList, null);
     }
 
     /**
-     * Batch-update the entity list non-strictly modified-only of same-set columns. (NonExclusiveControl) <br>
-     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
-     * <span style="color: #CC4747; font-size: 140%">You should specify same-set columns to all entities like this:</span>
-     * <pre>
-     * <span style="color: #70226C">for</span> (... : ...) {
-     *     MemberWithdrawal memberWithdrawal = <span style="color: #70226C">new</span> MemberWithdrawal();
-     *     memberWithdrawal.setFooName("foo");
-     *     <span style="color: #70226C">if</span> (...) {
-     *         memberWithdrawal.setFooPrice(123);
-     *     } <span style="color: #70226C">else</span> {
-     *         memberWithdrawal.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//memberWithdrawal.setFooDate(...); // *not allowed, fragmented</span>
-     *     }
-     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
-     *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     memberWithdrawalList.add(memberWithdrawal);
-     * }
-     * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">batchUpdate</span>(memberWithdrawalList);
-     * </pre>
-     * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
-     * @return The array of updated count. (NotNull, EmptyAllowed)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     */
-    public int[] batchUpdateNonstrict(List<MemberWithdrawal> memberWithdrawalList) {
-        return doBatchUpdateNonstrict(memberWithdrawalList, null);
-    }
-
-    /**
-     * Batch-delete the entity list. (ExclusiveControl) <br>
+     * Batch-delete the entity list. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
      * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
-     * @throws BatchEntityAlreadyUpdatedException When the entity has already been updated. This exception extends EntityAlreadyUpdatedException.
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
     public int[] batchDelete(List<MemberWithdrawal> memberWithdrawalList) {
         return doBatchDelete(memberWithdrawalList, null);
-    }
-
-    /**
-     * Batch-delete the entity list non-strictly. {NonExclusiveControl} <br>
-     * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
-     * @return The array of deleted count. (NotNull, EmptyAllowed)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     */
-    public int[] batchDeleteNonstrict(List<MemberWithdrawal> memberWithdrawalList) {
-        return doBatchDeleteNonstrict(memberWithdrawalList, null);
     }
 
     // ===================================================================================
@@ -740,7 +647,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Update the entity with varying requests modified-only. (ZeroUpdateException, ExclusiveControl) <br>
+     * Update the entity with varying requests modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
@@ -756,9 +663,9 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param memberWithdrawal The entity of update. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param memberWithdrawal The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -767,40 +674,12 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Update the entity with varying requests non-strictly modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
-     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
-     * Other specifications are same as updateNonstrict(entity).
-     * <pre>
-     * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * MemberWithdrawal memberWithdrawal = <span style="color: #70226C">new</span> MemberWithdrawal();
-     * memberWithdrawal.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * memberWithdrawal.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
-     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
-     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//memberWithdrawal.setVersionNo(value);</span>
-     * <span style="color: #0000C0">memberWithdrawalBhv</span>.<span style="color: #CC4747">varyingUpdateNonstrict</span>(memberWithdrawal, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
-     *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
-     * });
-     * </pre>
-     * @param memberWithdrawal The entity of update. (NotNull, PrimaryKeyNotNull)
-     * @param opLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
-     */
-    public void varyingUpdateNonstrict(MemberWithdrawal memberWithdrawal, WritableOptionCall<MemberWithdrawalCB, UpdateOption<MemberWithdrawalCB>> opLambda) {
-        doUpdateNonstrict(memberWithdrawal, createUpdateOption(opLambda));
-    }
-
-    /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
      * @param memberWithdrawal The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -809,43 +688,16 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Insert or update the entity with varying requests non-strictly. (NonExclusiveControl: when update) <br>
-     * Other specifications are same as insertOrUpdateNonstrict(entity).
-     * @param memberWithdrawal The entity of insert or update. (NotNull)
-     * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
-     * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
-     */
-    public void varyingInsertOrUpdateNonstrict(MemberWithdrawal memberWithdrawal, WritableOptionCall<MemberWithdrawalCB, InsertOption<MemberWithdrawalCB>> insertOpLambda, WritableOptionCall<MemberWithdrawalCB, UpdateOption<MemberWithdrawalCB>> updateOpLambda) {
-        doInsertOrUpdateNonstrict(memberWithdrawal, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
-    }
-
-    /**
-     * Delete the entity with varying requests. (ZeroUpdateException, ExclusiveControl) <br>
+     * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
      * @param memberWithdrawal The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
-     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
     public void varyingDelete(MemberWithdrawal memberWithdrawal, WritableOptionCall<MemberWithdrawalCB, DeleteOption<MemberWithdrawalCB>> opLambda) {
         doDelete(memberWithdrawal, createDeleteOption(opLambda));
-    }
-
-    /**
-     * Delete the entity with varying requests non-strictly. (ZeroUpdateException, NonExclusiveControl) <br>
-     * Now a valid option does not exist. <br>
-     * Other specifications are same as deleteNonstrict(entity).
-     * @param memberWithdrawal The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
-     * @param opLambda The callback for option of delete for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     */
-    public void varyingDeleteNonstrict(MemberWithdrawal memberWithdrawal, WritableOptionCall<MemberWithdrawalCB, DeleteOption<MemberWithdrawalCB>> opLambda) {
-        doDeleteNonstrict(memberWithdrawal, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -878,19 +730,6 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     /**
-     * Batch-update the list with varying requests non-strictly. <br>
-     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
-     * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
-     * Other specifications are same as batchUpdateNonstrict(entityList).
-     * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
-     * @param opLambda The callback for option of update for varying requests. (NotNull)
-     * @return The array of updated count. (NotNull, EmptyAllowed)
-     */
-    public int[] varyingBatchUpdateNonstrict(List<MemberWithdrawal> memberWithdrawalList, WritableOptionCall<MemberWithdrawalCB, UpdateOption<MemberWithdrawalCB>> opLambda) {
-        return doBatchUpdateNonstrict(memberWithdrawalList, createUpdateOption(opLambda));
-    }
-
-    /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
@@ -900,18 +739,6 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      */
     public int[] varyingBatchDelete(List<MemberWithdrawal> memberWithdrawalList, WritableOptionCall<MemberWithdrawalCB, DeleteOption<MemberWithdrawalCB>> opLambda) {
         return doBatchDelete(memberWithdrawalList, createDeleteOption(opLambda));
-    }
-
-    /**
-     * Batch-delete the list with varying requests non-strictly. <br>
-     * For example, limitBatchDeleteLogging(). <br>
-     * Other specifications are same as batchDeleteNonstrict(entityList).
-     * @param memberWithdrawalList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
-     * @param opLambda The callback for option of delete for varying requests. (NotNull)
-     * @return The array of deleted count. (NotNull, EmptyAllowed)
-     */
-    public int[] varyingBatchDeleteNonstrict(List<MemberWithdrawal> memberWithdrawalList, WritableOptionCall<MemberWithdrawalCB, DeleteOption<MemberWithdrawalCB>> opLambda) {
-        return doBatchDeleteNonstrict(memberWithdrawalList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -987,8 +814,8 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * memberWithdrawalBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * memberWithdrawalBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * memberWithdrawalBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * memberWithdrawalBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * memberWithdrawalBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -996,7 +823,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      * memberWithdrawalBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * memberWithdrawalBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * memberWithdrawalBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * memberWithdrawalBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * memberWithdrawalBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -1004,7 +831,7 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
      * memberWithdrawalBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * memberWithdrawalBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * memberWithdrawalBhv.outideSql().removeBlockComment().selectList()
      * memberWithdrawalBhv.outideSql().removeLineComment().selectList()
      * memberWithdrawalBhv.outideSql().formatSql().selectList()
@@ -1017,15 +844,30 @@ public abstract class BsMemberWithdrawalBhv extends AbstractBehaviorWritable<Mem
     }
 
     // ===================================================================================
-    //                                                                Optimistic Lock Info
-    //                                                                ====================
-    @Override
-    protected boolean hasVersionNoValue(Entity et) { return downcast(et).getVersionNo() != null; }
-
-    // ===================================================================================
     //                                                                         Type Helper
     //                                                                         ===========
     protected Class<? extends MemberWithdrawal> typeOfSelectedEntity() { return MemberWithdrawal.class; }
     protected Class<MemberWithdrawal> typeOfHandlingEntity() { return MemberWithdrawal.class; }
     protected Class<MemberWithdrawalCB> typeOfHandlingConditionBean() { return MemberWithdrawalCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

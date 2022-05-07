@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.cbean.nss;
 import org.docksidestage.install.dbflute.cbean.cq.PurchasePaymentCQ;
 
 /**
- * The nest select set-upper of PURCHASE_PAYMENT.
+ * The nest select set-upper of purchase_payment.
  * @author DBFlute(AutoGenerator)
  */
 public class PurchasePaymentNss {
@@ -20,7 +20,7 @@ public class PurchasePaymentNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * PURCHASE by my PURCHASE_ID, named 'purchase'.
+     * purchase by my PURCHASE_ID, named 'purchase'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public PurchaseNss withPurchase() {

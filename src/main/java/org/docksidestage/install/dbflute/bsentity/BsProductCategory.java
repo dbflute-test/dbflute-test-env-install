@@ -12,35 +12,36 @@ import org.docksidestage.install.dbflute.allcommon.DBMetaInstanceHandler;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The entity of PRODUCT_CATEGORY as TABLE. <br>
+ * The entity of product_category as TABLE. <br>
+ * 商品カテゴリ : 商品のカテゴリを表現するマスタ。自己参照FKの階層になっている。
  * <pre>
  * [primary-key]
  *     PRODUCT_CATEGORY_CODE
- * 
+ *
  * [column]
  *     PRODUCT_CATEGORY_CODE, PRODUCT_CATEGORY_NAME, PARENT_CATEGORY_CODE
- * 
+ *
  * [sequence]
  *     
- * 
+ *
  * [identity]
  *     
- * 
+ *
  * [version-no]
  *     
- * 
+ *
  * [foreign table]
- *     PRODUCT_CATEGORY
- * 
+ *     product_category
+ *
  * [referrer table]
- *     PRODUCT, PRODUCT_CATEGORY
- * 
+ *     product, product_category
+ *
  * [foreign property]
  *     productCategorySelf
- * 
+ *
  * [referrer property]
  *     productList, productCategorySelfList
- * 
+ *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * String productCategoryCode = entity.getProductCategoryCode();
@@ -70,7 +71,7 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     /** PRODUCT_CATEGORY_NAME: {NotNull, VARCHAR(50)} */
     protected String _productCategoryName;
 
-    /** PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY} */
+    /** PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category} */
     protected String _parentCategoryCode;
 
     // ===================================================================================
@@ -83,12 +84,12 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
 
     /** {@inheritDoc} */
     public String asTableDbName() {
-        return "PRODUCT_CATEGORY";
+        return "product_category";
     }
 
     // ===================================================================================
-    //                                                                         Primary Key
-    //                                                                         ===========
+    //                                                                        Key Handling
+    //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
         if (_productCategoryCode == null) { return false; }
@@ -98,11 +99,11 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** PRODUCT_CATEGORY by my PARENT_CATEGORY_CODE, named 'productCategorySelf'. */
+    /** product_category by my PARENT_CATEGORY_CODE, named 'productCategorySelf'. */
     protected OptionalEntity<ProductCategory> _productCategorySelf;
 
     /**
-     * [get] PRODUCT_CATEGORY by my PARENT_CATEGORY_CODE, named 'productCategorySelf'. <br>
+     * [get] product_category by my PARENT_CATEGORY_CODE, named 'productCategorySelf'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'productCategorySelf'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -112,7 +113,7 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     }
 
     /**
-     * [set] PRODUCT_CATEGORY by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
+     * [set] product_category by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
      * @param productCategorySelf The entity of foreign property 'productCategorySelf'. (NullAllowed)
      */
     public void setProductCategorySelf(OptionalEntity<ProductCategory> productCategorySelf) {
@@ -122,11 +123,11 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'. */
+    /** product by PRODUCT_CATEGORY_CODE, named 'productList'. */
     protected List<Product> _productList;
 
     /**
-     * [get] PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * [get] product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * @return The entity list of referrer property 'productList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Product> getProductList() {
@@ -135,18 +136,18 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     }
 
     /**
-     * [set] PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * [set] product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * @param productList The entity list of referrer property 'productList'. (NullAllowed)
      */
     public void setProductList(List<Product> productList) {
         _productList = productList;
     }
 
-    /** PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'. */
+    /** product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'. */
     protected List<ProductCategory> _productCategorySelfList;
 
     /**
-     * [get] PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * [get] product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * @return The entity list of referrer property 'productCategorySelfList'. (NotNull: even if no loading, returns empty list)
      */
     public List<ProductCategory> getProductCategorySelfList() {
@@ -155,14 +156,14 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     }
 
     /**
-     * [set] PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * [set] product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * @param productCategorySelfList The entity list of referrer property 'productCategorySelfList'. (NullAllowed)
      */
     public void setProductCategorySelfList(List<ProductCategory> productCategorySelfList) {
         _productCategorySelfList = productCategorySelfList;
     }
 
-    protected <ELEMENT> List<ELEMENT> newReferrerList() {
+    protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
 
@@ -241,6 +242,7 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     //                                                                            ========
     /**
      * [get] PRODUCT_CATEGORY_CODE: {PK, NotNull, CHAR(3)} <br>
+     * 商品カテゴリコード : 自分のテーブルの別のレコードからも参照される。
      * @return The value of the column 'PRODUCT_CATEGORY_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getProductCategoryCode() {
@@ -250,6 +252,7 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
 
     /**
      * [set] PRODUCT_CATEGORY_CODE: {PK, NotNull, CHAR(3)} <br>
+     * 商品カテゴリコード : 自分のテーブルの別のレコードからも参照される。
      * @param productCategoryCode The value of the column 'PRODUCT_CATEGORY_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setProductCategoryCode(String productCategoryCode) {
@@ -259,6 +262,7 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
 
     /**
      * [get] PRODUCT_CATEGORY_NAME: {NotNull, VARCHAR(50)} <br>
+     * 商品カテゴリ名称
      * @return The value of the column 'PRODUCT_CATEGORY_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getProductCategoryName() {
@@ -268,6 +272,7 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
 
     /**
      * [set] PRODUCT_CATEGORY_NAME: {NotNull, VARCHAR(50)} <br>
+     * 商品カテゴリ名称
      * @param productCategoryName The value of the column 'PRODUCT_CATEGORY_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setProductCategoryName(String productCategoryName) {
@@ -276,7 +281,8 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     }
 
     /**
-     * [get] PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY} <br>
+     * [get] PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category} <br>
+     * 親カテゴリコード : 最上位の場合はデータなし。まさひく自己参照FKカラム！
      * @return The value of the column 'PARENT_CATEGORY_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getParentCategoryCode() {
@@ -285,7 +291,8 @@ public abstract class BsProductCategory extends AbstractEntity implements Domain
     }
 
     /**
-     * [set] PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY} <br>
+     * [set] PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category} <br>
+     * 親カテゴリコード : 最上位の場合はデータなし。まさひく自己参照FKカラム！
      * @param parentCategoryCode The value of the column 'PARENT_CATEGORY_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setParentCategoryCode(String parentCategoryCode) {

@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsMemberLogin;
 
 /**
- * The entity of MEMBER_LOGIN.
+ * The entity of member_login.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

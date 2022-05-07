@@ -7,13 +7,13 @@ import org.docksidestage.install.dbflute.exbhv.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The referrer loader of MEMBER_WITHDRAWAL as TABLE. <br>
+ * The referrer loader of member_withdrawal as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, WITHDRAWAL_REASON_CODE, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, WITHDRAWAL_REASON_CODE, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER
  *
  * [sequence]
  *     
@@ -22,10 +22,10 @@ import org.docksidestage.install.dbflute.exentity.*;
  *     
  *
  * [version-no]
- *     VERSION_NO
+ *     
  *
  * [foreign table]
- *     MEMBER, WITHDRAWAL_REASON
+ *     member, withdrawal_reason
  *
  * [referrer table]
  *     

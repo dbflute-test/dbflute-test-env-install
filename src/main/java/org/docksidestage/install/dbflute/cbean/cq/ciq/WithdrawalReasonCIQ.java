@@ -12,7 +12,7 @@ import org.docksidestage.install.dbflute.cbean.cq.bs.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of WITHDRAWAL_REASON.
+ * The condition-query for in-line of withdrawal_reason.
  * @author DBFlute(AutoGenerator)
  */
 public class WithdrawalReasonCIQ extends AbstractBsWithdrawalReasonCQ {

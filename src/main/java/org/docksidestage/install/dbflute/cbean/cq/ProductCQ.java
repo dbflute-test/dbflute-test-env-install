@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsProductCQ;
 
 /**
- * The condition-query of PRODUCT.
+ * The condition-query of product.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsMemberLoginCQ;
 
 /**
- * The condition-query of MEMBER_LOGIN.
+ * The condition-query of member_login.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

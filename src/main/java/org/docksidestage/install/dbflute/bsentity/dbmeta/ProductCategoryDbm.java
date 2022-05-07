@@ -14,7 +14,7 @@ import org.docksidestage.install.dbflute.allcommon.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The DB meta of PRODUCT_CATEGORY. (Singleton)
+ * The DB meta of product_category. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class ProductCategoryDbm extends AbstractDBMeta {
@@ -65,20 +65,22 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "PRODUCT_CATEGORY";
+    protected final String _tableDbName = "product_category";
+    protected final String _tableDispName = "product_category";
     protected final String _tablePropertyName = "productCategory";
-    protected final TableSqlName _tableSqlName = new TableSqlName("PRODUCT_CATEGORY", _tableDbName);
+    protected final TableSqlName _tableSqlName = new TableSqlName("product_category", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
+    public String getTableDispName() { return _tableDispName; }
     public String getTablePropertyName() { return _tablePropertyName; }
     public TableSqlName getTableSqlName() { return _tableSqlName; }
 
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, null, String.class, "productCategoryCode", null, true, false, true, "CHAR", 3, 0, null, false, null, null, null, "productList,productCategorySelfList", null, false);
-    protected final ColumnInfo _columnProductCategoryName = cci("PRODUCT_CATEGORY_NAME", "PRODUCT_CATEGORY_NAME", null, null, String.class, "productCategoryName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnParentCategoryCode = cci("PARENT_CATEGORY_CODE", "PARENT_CATEGORY_CODE", null, null, String.class, "parentCategoryCode", null, false, false, false, "CHAR", 3, 0, null, false, null, null, "productCategorySelf", null, null, false);
+    protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, null, String.class, "productCategoryCode", null, true, false, true, "CHAR", 3, 0, null, null, false, null, null, null, "productList,productCategorySelfList", null, false);
+    protected final ColumnInfo _columnProductCategoryName = cci("PRODUCT_CATEGORY_NAME", "PRODUCT_CATEGORY_NAME", null, null, String.class, "productCategoryName", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnParentCategoryCode = cci("PARENT_CATEGORY_CODE", "PARENT_CATEGORY_CODE", null, null, String.class, "parentCategoryCode", null, false, false, false, "CHAR", 3, 0, null, null, false, null, null, "productCategorySelf", null, null, false);
 
     /**
      * PRODUCT_CATEGORY_CODE: {PK, NotNull, CHAR(3)}
@@ -91,7 +93,7 @@ public class ProductCategoryDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnProductCategoryName() { return _columnProductCategoryName; }
     /**
-     * PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY}
+     * PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnParentCategoryCode() { return _columnParentCategoryCode; }
@@ -125,7 +127,7 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * PRODUCT_CATEGORY by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
+     * product_category by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignProductCategorySelf() {
@@ -137,7 +139,7 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     //                                     Referrer Property
     //                                     -----------------
     /**
-     * PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerProductList() {
@@ -145,7 +147,7 @@ public class ProductCategoryDbm extends AbstractDBMeta {
         return cri("FK_PRODUCT_PRODUCT_CATEGORY", "productList", this, ProductDbm.getInstance(), mp, false, "productCategory");
     }
     /**
-     * PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerProductCategorySelfList() {

@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsServiceRankCQ;
 
 /**
- * The condition-query of SERVICE_RANK.
+ * The condition-query of service_rank.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

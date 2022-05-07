@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.cbean;
 import org.docksidestage.install.dbflute.cbean.bs.BsMemberCB;
 
 /**
- * The condition-bean of MEMBER.
+ * The condition-bean of member.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

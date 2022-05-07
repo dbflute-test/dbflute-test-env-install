@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of MEMBER_SERVICE.
+ * The base condition-query of member_service.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
@@ -35,7 +35,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from MEMBER_SERVICE) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from member_service) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join MEMBER_SERVICE on ... and FOO = [value] ...}
+     * {select ... from ... left outer join member_service on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -79,16 +79,16 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _memberServiceId; }
     protected ConditionValue xgetCValueMemberServiceId() { return xdfgetMemberServiceId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MEMBER_SERVICE_ID: {PK, ID, NotNull, INTEGER(10)}
+     * MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_MemberServiceId_Asc() { regOBA("MEMBER_SERVICE_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_SERVICE_ID: {PK, ID, NotNull, INTEGER(10)}
+     * MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_MemberServiceId_Desc() { regOBD("MEMBER_SERVICE_ID"); return this; }
@@ -99,16 +99,16 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _memberId; }
     protected ConditionValue xgetCValueMemberId() { return xdfgetMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -119,16 +119,16 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _servicePointCount; }
     protected ConditionValue xgetCValueServicePointCount() { return xdfgetServicePointCount(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * SERVICE_POINT_COUNT: {IX, NotNull, INTEGER(10)}
+     * SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_ServicePointCount_Asc() { regOBA("SERVICE_POINT_COUNT"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SERVICE_POINT_COUNT: {IX, NotNull, INTEGER(10)}
+     * SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_ServicePointCount_Desc() { regOBD("SERVICE_POINT_COUNT"); return this; }
@@ -139,16 +139,16 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _serviceRankCode; }
     protected ConditionValue xgetCValueServiceRankCode() { return xdfgetServiceRankCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to SERVICE_RANK}
+     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_ServiceRankCode_Asc() { regOBA("SERVICE_RANK_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to SERVICE_RANK}
+     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_ServiceRankCode_Desc() { regOBD("SERVICE_RANK_CODE"); return this; }
@@ -159,16 +159,16 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _registerDatetime; }
     protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -179,7 +179,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _registerUser; }
     protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -199,16 +199,16 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _updateDatetime; }
     protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -219,7 +219,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _updateUser; }
     protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -239,7 +239,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
       return _versionNo; }
     protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * VERSION_NO: {NotNull, BIGINT(19)}
      * @return this. (NotNull)
@@ -307,7 +307,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER by my MEMBER_ID, named 'member'.
+     * member by my MEMBER_ID, named 'member'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMember() {
@@ -319,7 +319,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberCQ xcreateQueryMember() {
-        String nrp = xresolveNRP("MEMBER_SERVICE", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_service", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "member", nrp);
     }
     protected void xsetupOuterJoinMember() { xregOutJo("member"); }
@@ -327,7 +327,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * SERVICE_RANK by my SERVICE_RANK_CODE, named 'serviceRank'.
+     * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
      * @return The instance of condition-query. (NotNull)
      */
     public ServiceRankCQ queryServiceRank() {
@@ -339,7 +339,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
         return xgetQueRlMap(prop);
     }
     protected ServiceRankCQ xcreateQueryServiceRank() {
-        String nrp = xresolveNRP("MEMBER_SERVICE", "serviceRank"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_service", "serviceRank"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new ServiceRankCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "serviceRank", nrp);
     }
     protected void xsetupOuterJoinServiceRank() { xregOutJo("serviceRank"); }

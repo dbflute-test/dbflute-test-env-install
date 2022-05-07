@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of REGION as TABLE. <br>
+ * The behavior of region as TABLE. <br>
  * <pre>
  * [primary key]
  *     REGION_ID
@@ -41,7 +43,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     MEMBER_ADDRESS
+ *     member_address
  *
  * [foreign property]
  *     
@@ -65,7 +67,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
     /** {@inheritDoc} */
     public RegionDbm asDBMeta() { return RegionDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "REGION"; }
+    public String asTableDbName() { return "region"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">region</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">regionBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -157,7 +159,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
 
     /**
      * Select the entity by the primary-key value.
-     * @param regionId : PK, NotNull, INTEGER(10). (NotNull)
+     * @param regionId : PK, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -290,7 +292,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -361,7 +363,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * MEMBER_ADDRESS by REGION_ID, named 'memberAddressList'.
+     * member_address by REGION_ID, named 'memberAddressList'.
      * <pre>
      * <span style="color: #0000C0">regionBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">regionList</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">addressCB</span>.setupSelect...
@@ -392,7 +394,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * MEMBER_ADDRESS by REGION_ID, named 'memberAddressList'.
+     * member_address by REGION_ID, named 'memberAddressList'.
      * <pre>
      * <span style="color: #0000C0">regionBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">region</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">addressCB</span>.setupSelect...
@@ -860,8 +862,8 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * regionBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * regionBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * regionBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * regionBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * regionBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -869,7 +871,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
      * regionBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * regionBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * regionBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * regionBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * regionBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -877,7 +879,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
      * regionBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * regionBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * regionBhv.outideSql().removeBlockComment().selectList()
      * regionBhv.outideSql().removeLineComment().selectList()
      * regionBhv.outideSql().formatSql().selectList()
@@ -895,4 +897,25 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable<Region, Regio
     protected Class<? extends Region> typeOfSelectedEntity() { return Region.class; }
     protected Class<Region> typeOfHandlingEntity() { return Region.class; }
     protected Class<RegionCB> typeOfHandlingConditionBean() { return RegionCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

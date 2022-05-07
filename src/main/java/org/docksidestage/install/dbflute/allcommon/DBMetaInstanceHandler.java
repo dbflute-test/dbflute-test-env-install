@@ -31,22 +31,22 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     protected static final Map<String, String> _tableDbNameClassNameMap;
     static {
         final Map<String, String> tmpMap = newHashMap();
-        tmpMap.put("MEMBER", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberDbm");
-        tmpMap.put("MEMBER_ADDRESS", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberAddressDbm");
-        tmpMap.put("MEMBER_FOLLOWING", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberFollowingDbm");
-        tmpMap.put("MEMBER_LOGIN", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberLoginDbm");
-        tmpMap.put("MEMBER_SECURITY", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberSecurityDbm");
-        tmpMap.put("MEMBER_SERVICE", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberServiceDbm");
-        tmpMap.put("MEMBER_STATUS", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberStatusDbm");
-        tmpMap.put("MEMBER_WITHDRAWAL", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberWithdrawalDbm");
-        tmpMap.put("PRODUCT", "org.docksidestage.install.dbflute.bsentity.dbmeta.ProductDbm");
-        tmpMap.put("PRODUCT_CATEGORY", "org.docksidestage.install.dbflute.bsentity.dbmeta.ProductCategoryDbm");
-        tmpMap.put("PRODUCT_STATUS", "org.docksidestage.install.dbflute.bsentity.dbmeta.ProductStatusDbm");
-        tmpMap.put("PURCHASE", "org.docksidestage.install.dbflute.bsentity.dbmeta.PurchaseDbm");
-        tmpMap.put("PURCHASE_PAYMENT", "org.docksidestage.install.dbflute.bsentity.dbmeta.PurchasePaymentDbm");
-        tmpMap.put("REGION", "org.docksidestage.install.dbflute.bsentity.dbmeta.RegionDbm");
-        tmpMap.put("SERVICE_RANK", "org.docksidestage.install.dbflute.bsentity.dbmeta.ServiceRankDbm");
-        tmpMap.put("WITHDRAWAL_REASON", "org.docksidestage.install.dbflute.bsentity.dbmeta.WithdrawalReasonDbm");
+        tmpMap.put("member", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberDbm");
+        tmpMap.put("member_address", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberAddressDbm");
+        tmpMap.put("member_following", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberFollowingDbm");
+        tmpMap.put("member_login", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberLoginDbm");
+        tmpMap.put("member_security", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberSecurityDbm");
+        tmpMap.put("member_service", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberServiceDbm");
+        tmpMap.put("member_status", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberStatusDbm");
+        tmpMap.put("member_withdrawal", "org.docksidestage.install.dbflute.bsentity.dbmeta.MemberWithdrawalDbm");
+        tmpMap.put("product", "org.docksidestage.install.dbflute.bsentity.dbmeta.ProductDbm");
+        tmpMap.put("product_category", "org.docksidestage.install.dbflute.bsentity.dbmeta.ProductCategoryDbm");
+        tmpMap.put("product_status", "org.docksidestage.install.dbflute.bsentity.dbmeta.ProductStatusDbm");
+        tmpMap.put("purchase", "org.docksidestage.install.dbflute.bsentity.dbmeta.PurchaseDbm");
+        tmpMap.put("purchase_payment", "org.docksidestage.install.dbflute.bsentity.dbmeta.PurchasePaymentDbm");
+        tmpMap.put("region", "org.docksidestage.install.dbflute.bsentity.dbmeta.RegionDbm");
+        tmpMap.put("service_rank", "org.docksidestage.install.dbflute.bsentity.dbmeta.ServiceRankDbm");
+        tmpMap.put("withdrawal_reason", "org.docksidestage.install.dbflute.bsentity.dbmeta.WithdrawalReasonDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 
@@ -59,7 +59,7 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     }
 
     /**
-     * Get the unmodifiable map of DB meta.
+     * Get the unmodifiable map of DB meta. map:{tableDbName = DBMeta}
      * @return The unmodifiable map that contains all instances of DB meta. (NotNull, NotEmpty)
      */
     public static Map<String, DBMeta> getUnmodifiableDBMetaMap() {
@@ -193,12 +193,12 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
 
     protected static String removeSchemaIfExists(String name) {
         int dotLastIndex = name.lastIndexOf(".");
-        return dotLastIndex >= 0 ? name.substring(dotLastIndex + ".".length()) : name; 
+        return dotLastIndex >= 0 ? name.substring(dotLastIndex + ".".length()) : name;
     }
 
     protected static String extractSchemaIfExists(String name) {
         int dotLastIndex = name.lastIndexOf(".");
-        return dotLastIndex >= 0 ? name.substring(0, dotLastIndex) : null; 
+        return dotLastIndex >= 0 ? name.substring(0, dotLastIndex) : null;
     }
 
     protected static String strip(String name) {
@@ -288,7 +288,7 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
 
     protected static Entity newEntity(Class<?> entityType) {
         try {
-            return (Entity)entityType.newInstance();
+            return (Entity)entityType.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             String msg = "Failed to new the instance: " + entityType;
             throw new IllegalStateException(msg, e);

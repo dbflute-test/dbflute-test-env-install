@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.cbean;
 import org.docksidestage.install.dbflute.cbean.bs.BsWithdrawalReasonCB;
 
 /**
- * The condition-bean of WITHDRAWAL_REASON.
+ * The condition-bean of withdrawal_reason.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

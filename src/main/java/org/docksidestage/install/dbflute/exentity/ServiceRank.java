@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsServiceRank;
 
 /**
- * The entity of SERVICE_RANK.
+ * The entity of service_rank.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

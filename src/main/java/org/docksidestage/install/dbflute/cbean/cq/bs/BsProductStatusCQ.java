@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of PRODUCT_STATUS.
+ * The base condition-query of product_status.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
@@ -35,7 +35,7 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from PRODUCT_STATUS) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from product_status) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join PRODUCT_STATUS on ... and FOO = [value] ...}
+     * {select ... from ... left outer join product_status on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -93,7 +93,7 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
     public Map<String, Object> xdfgetProductStatusCode_QueryDerivedReferrer_ProductListParameter() { return xgetSQuePmMap("productStatusCode_QueryDerivedReferrer_ProductList"); }
     public String keepProductStatusCode_QueryDerivedReferrer_ProductListParameter(Object pm) { return xkeepSQuePm("productStatusCode_QueryDerivedReferrer_ProductList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
@@ -113,7 +113,7 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
       return _productStatusName; }
     protected ConditionValue xgetCValueProductStatusName() { return xdfgetProductStatusName(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -133,16 +133,16 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
       return _displayOrder; }
     protected ConditionValue xgetCValueDisplayOrder() { return xdfgetDisplayOrder(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }

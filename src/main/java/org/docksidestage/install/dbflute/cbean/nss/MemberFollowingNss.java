@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.cbean.nss;
 import org.docksidestage.install.dbflute.cbean.cq.MemberFollowingCQ;
 
 /**
- * The nest select set-upper of MEMBER_FOLLOWING.
+ * The nest select set-upper of member_following.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberFollowingNss {
@@ -20,7 +20,7 @@ public class MemberFollowingNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER by my MY_MEMBER_ID, named 'memberByMyMemberId'.
+     * member by my MY_MEMBER_ID, named 'memberByMyMemberId'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberNss withMemberByMyMemberId() {
@@ -29,7 +29,7 @@ public class MemberFollowingNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
+     * member by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberNss withMemberByYourMemberId() {

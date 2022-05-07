@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsMember;
 
 /**
- * The entity of MEMBER.
+ * The entity of member.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

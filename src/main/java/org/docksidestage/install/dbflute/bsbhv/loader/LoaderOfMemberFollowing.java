@@ -7,7 +7,7 @@ import org.docksidestage.install.dbflute.exbhv.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The referrer loader of MEMBER_FOLLOWING as TABLE. <br>
+ * The referrer loader of member_following as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_FOLLOWING_ID
@@ -25,7 +25,7 @@ import org.docksidestage.install.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     MEMBER
+ *     member
  *
  * [referrer table]
  *     

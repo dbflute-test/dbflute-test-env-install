@@ -7,7 +7,7 @@ import org.docksidestage.install.dbflute.exbhv.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The referrer loader of PURCHASE_PAYMENT as TABLE. <br>
+ * The referrer loader of purchase_payment as TABLE. <br>
  * <pre>
  * [primary key]
  *     PURCHASE_PAYMENT_ID
@@ -25,7 +25,7 @@ import org.docksidestage.install.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     PURCHASE
+ *     purchase
  *
  * [referrer table]
  *     

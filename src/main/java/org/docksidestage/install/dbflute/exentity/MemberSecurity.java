@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsMemberSecurity;
 
 /**
- * The entity of MEMBER_SECURITY.
+ * The entity of member_security.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

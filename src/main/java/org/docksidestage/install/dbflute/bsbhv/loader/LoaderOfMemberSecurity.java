@@ -7,7 +7,7 @@ import org.docksidestage.install.dbflute.exbhv.*;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The referrer loader of MEMBER_SECURITY as TABLE. <br>
+ * The referrer loader of member_security as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_ID
@@ -25,7 +25,7 @@ import org.docksidestage.install.dbflute.exentity.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     MEMBER
+ *     member
  *
  * [referrer table]
  *     

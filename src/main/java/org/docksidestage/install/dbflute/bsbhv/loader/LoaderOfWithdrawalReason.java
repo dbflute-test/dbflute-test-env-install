@@ -9,7 +9,7 @@ import org.docksidestage.install.dbflute.exentity.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The referrer loader of WITHDRAWAL_REASON as TABLE. <br>
+ * The referrer loader of withdrawal_reason as TABLE. <br>
  * <pre>
  * [primary key]
  *     WITHDRAWAL_REASON_CODE
@@ -30,7 +30,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     MEMBER_WITHDRAWAL
+ *     member_withdrawal
  *
  * [foreign property]
  *     
@@ -65,7 +65,7 @@ public class LoaderOfWithdrawalReason {
 
     /**
      * Load referrer of memberWithdrawalList by the set-upper of referrer. <br>
-     * MEMBER_WITHDRAWAL by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
+     * member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
      * <pre>
      * <span style="color: #0000C0">withdrawalReasonBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">withdrawalReasonList</span>, <span style="color: #553000">reasonLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">reasonLoader</span>.<span style="color: #CC4747">loadMemberWithdrawal</span>(<span style="color: #553000">withdrawalCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

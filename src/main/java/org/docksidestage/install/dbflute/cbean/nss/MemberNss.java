@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.cbean.nss;
 import org.docksidestage.install.dbflute.cbean.cq.MemberCQ;
 
 /**
- * The nest select set-upper of MEMBER.
+ * The nest select set-upper of member.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberNss {
@@ -20,14 +20,14 @@ public class MemberNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
      */
     public void withMemberStatus() {
         _query.xdoNss(() -> _query.queryMemberStatus());
     }
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
+     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberSecurityNss withMemberSecurityAsOne() {
@@ -36,7 +36,7 @@ public class MemberNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
+     * member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberServiceNss withMemberServiceAsOne() {
@@ -45,7 +45,7 @@ public class MemberNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberWithdrawalNss withMemberWithdrawalAsOne() {

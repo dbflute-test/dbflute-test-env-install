@@ -12,7 +12,7 @@ import org.docksidestage.install.dbflute.cbean.cq.bs.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of PRODUCT.
+ * The condition-query for in-line of product.
  * @author DBFlute(AutoGenerator)
  */
 public class ProductCIQ extends AbstractBsProductCQ {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of MEMBER_SERVICE as TABLE. <br>
+ * The behavior of member_service as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_SERVICE_ID
@@ -38,7 +40,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     MEMBER, SERVICE_RANK
+ *     member, service_rank
  *
  * [referrer table]
  *     
@@ -65,7 +67,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
     /** {@inheritDoc} */
     public MemberServiceDbm asDBMeta() { return MemberServiceDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "MEMBER_SERVICE"; }
+    public String asTableDbName() { return "member_service"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">memberService</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">memberServiceBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -157,7 +159,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberServiceId : PK, ID, NotNull, INTEGER(10). (NotNull)
+     * @param memberServiceId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -186,7 +188,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
 
     /**
      * Select the entity by the unique-key value.
-     * @param memberId : UQ, IX, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
+     * @param memberId : UQ, NotNull, INT(10), FK to member. (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -315,7 +317,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -1020,8 +1022,8 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * memberServiceBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * memberServiceBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * memberServiceBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * memberServiceBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * memberServiceBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -1029,7 +1031,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
      * memberServiceBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * memberServiceBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * memberServiceBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * memberServiceBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * memberServiceBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -1037,7 +1039,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
      * memberServiceBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * memberServiceBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * memberServiceBhv.outideSql().removeBlockComment().selectList()
      * memberServiceBhv.outideSql().removeLineComment().selectList()
      * memberServiceBhv.outideSql().formatSql().selectList()
@@ -1061,4 +1063,25 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
     protected Class<? extends MemberService> typeOfSelectedEntity() { return MemberService.class; }
     protected Class<MemberService> typeOfHandlingEntity() { return MemberService.class; }
     protected Class<MemberServiceCB> typeOfHandlingConditionBean() { return MemberServiceCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

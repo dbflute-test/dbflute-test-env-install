@@ -10,35 +10,36 @@ import org.docksidestage.install.dbflute.allcommon.DBMetaInstanceHandler;
 import org.docksidestage.install.dbflute.exentity.*;
 
 /**
- * The entity of PRODUCT_STATUS as TABLE. <br>
+ * The entity of product_status as TABLE. <br>
+ * 商品ステータス : 商品のステータスを表現する固定的なマスタ。
  * <pre>
  * [primary-key]
  *     PRODUCT_STATUS_CODE
- * 
+ *
  * [column]
  *     PRODUCT_STATUS_CODE, PRODUCT_STATUS_NAME, DISPLAY_ORDER
- * 
+ *
  * [sequence]
  *     
- * 
+ *
  * [identity]
  *     
- * 
+ *
  * [version-no]
  *     
- * 
+ *
  * [foreign table]
  *     
- * 
+ *
  * [referrer table]
- *     PRODUCT
- * 
+ *     product
+ *
  * [foreign property]
  *     
- * 
+ *
  * [referrer property]
  *     productList
- * 
+ *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * String productStatusCode = entity.getProductStatusCode();
@@ -68,7 +69,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     /** PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} */
     protected String _productStatusName;
 
-    /** DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)} */
+    /** DISPLAY_ORDER: {UQ, NotNull, INT(10)} */
     protected Integer _displayOrder;
 
     // ===================================================================================
@@ -81,12 +82,12 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
 
     /** {@inheritDoc} */
     public String asTableDbName() {
-        return "PRODUCT_STATUS";
+        return "product_status";
     }
 
     // ===================================================================================
-    //                                                                         Primary Key
-    //                                                                         ===========
+    //                                                                        Key Handling
+    //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
         if (_productStatusCode == null) { return false; }
@@ -96,7 +97,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param displayOrder : UQ, NotNull, INTEGER(10). (NotNull)
+     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
      */
     public void uniqueBy(Integer displayOrder) {
         __uniqueDrivenProperties.clear();
@@ -110,11 +111,11 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** PRODUCT by PRODUCT_STATUS_CODE, named 'productList'. */
+    /** product by PRODUCT_STATUS_CODE, named 'productList'. */
     protected List<Product> _productList;
 
     /**
-     * [get] PRODUCT by PRODUCT_STATUS_CODE, named 'productList'.
+     * [get] product by PRODUCT_STATUS_CODE, named 'productList'.
      * @return The entity list of referrer property 'productList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Product> getProductList() {
@@ -123,14 +124,14 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     }
 
     /**
-     * [set] PRODUCT by PRODUCT_STATUS_CODE, named 'productList'.
+     * [set] product by PRODUCT_STATUS_CODE, named 'productList'.
      * @param productList The entity list of referrer property 'productList'. (NullAllowed)
      */
     public void setProductList(List<Product> productList) {
         _productList = productList;
     }
 
-    protected <ELEMENT> List<ELEMENT> newReferrerList() {
+    protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
 
@@ -198,6 +199,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     //                                                                            ========
     /**
      * [get] PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)} <br>
+     * 商品ステータスコード : 商品ステータスを識別するコード。
      * @return The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getProductStatusCode() {
@@ -207,6 +209,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
 
     /**
      * [set] PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)} <br>
+     * 商品ステータスコード : 商品ステータスを識別するコード。
      * @param productStatusCode The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setProductStatusCode(String productStatusCode) {
@@ -216,6 +219,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
 
     /**
      * [get] PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br>
+     * 商品ステータス名称 : 表示用の名称、英語名カラムがないのでそのままメソッド名の一部としても利用される。
      * @return The value of the column 'PRODUCT_STATUS_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getProductStatusName() {
@@ -225,6 +229,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
 
     /**
      * [set] PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br>
+     * 商品ステータス名称 : 表示用の名称、英語名カラムがないのでそのままメソッド名の一部としても利用される。
      * @param productStatusName The value of the column 'PRODUCT_STATUS_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setProductStatusName(String productStatusName) {
@@ -233,7 +238,8 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     }
 
     /**
-     * [get] DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)} <br>
+     * [get] DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br>
+     * 表示順 : もう、ご想像の通りです。
      * @return The value of the column 'DISPLAY_ORDER'. (basically NotNull if selected: for the constraint)
      */
     public Integer getDisplayOrder() {
@@ -242,7 +248,8 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     }
 
     /**
-     * [set] DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)} <br>
+     * [set] DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br>
+     * 表示順 : もう、ご想像の通りです。
      * @param displayOrder The value of the column 'DISPLAY_ORDER'. (basically NotNull if update: for the constraint)
      */
     public void setDisplayOrder(Integer displayOrder) {

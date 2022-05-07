@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of MEMBER_FOLLOWING.
+ * The base condition-query of member_following.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
@@ -35,7 +35,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from MEMBER_FOLLOWING) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from member_following) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join MEMBER_FOLLOWING on ... and FOO = [value] ...}
+     * {select ... from ... left outer join member_following on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -79,7 +79,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _memberFollowingId; }
     protected ConditionValue xgetCValueMemberFollowingId() { return xdfgetMemberFollowingId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * MEMBER_FOLLOWING_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return this. (NotNull)
@@ -99,16 +99,16 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _myMemberId; }
     protected ConditionValue xgetCValueMyMemberId() { return xdfgetMyMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MY_MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER}
+     * MY_MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_MyMemberId_Asc() { regOBA("MY_MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MY_MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER}
+     * MY_MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_MyMemberId_Desc() { regOBD("MY_MEMBER_ID"); return this; }
@@ -119,16 +119,16 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _yourMemberId; }
     protected ConditionValue xgetCValueYourMemberId() { return xdfgetYourMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * YOUR_MEMBER_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to MEMBER}
+     * YOUR_MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_YourMemberId_Asc() { regOBA("YOUR_MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * YOUR_MEMBER_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to MEMBER}
+     * YOUR_MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_YourMemberId_Desc() { regOBD("YOUR_MEMBER_ID"); return this; }
@@ -139,16 +139,16 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _followDatetime; }
     protected ConditionValue xgetCValueFollowDatetime() { return xdfgetFollowDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * FOLLOW_DATETIME: {IX, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_FollowDatetime_Asc() { regOBA("FOLLOW_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * FOLLOW_DATETIME: {IX, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_FollowDatetime_Desc() { regOBD("FOLLOW_DATETIME"); return this; }
@@ -207,7 +207,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER by my MY_MEMBER_ID, named 'memberByMyMemberId'.
+     * member by my MY_MEMBER_ID, named 'memberByMyMemberId'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMemberByMyMemberId() {
@@ -219,7 +219,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberCQ xcreateQueryMemberByMyMemberId() {
-        String nrp = xresolveNRP("MEMBER_FOLLOWING", "memberByMyMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_following", "memberByMyMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberByMyMemberId", nrp);
     }
     protected void xsetupOuterJoinMemberByMyMemberId() { xregOutJo("memberByMyMemberId"); }
@@ -227,7 +227,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
+     * member by my YOUR_MEMBER_ID, named 'memberByYourMemberId'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMemberByYourMemberId() {
@@ -239,7 +239,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberCQ xcreateQueryMemberByYourMemberId() {
-        String nrp = xresolveNRP("MEMBER_FOLLOWING", "memberByYourMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_following", "memberByYourMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberByYourMemberId", nrp);
     }
     protected void xsetupOuterJoinMemberByYourMemberId() { xregOutJo("memberByYourMemberId"); }

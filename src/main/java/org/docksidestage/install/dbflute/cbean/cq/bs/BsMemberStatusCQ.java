@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of MEMBER_STATUS.
+ * The base condition-query of member_status.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
@@ -35,7 +35,7 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from MEMBER_STATUS) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from member_status) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join MEMBER_STATUS on ... and FOO = [value] ...}
+     * {select ... from ... left outer join member_status on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -107,7 +107,7 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
     public Map<String, Object> xdfgetMemberStatusCode_QueryDerivedReferrer_MemberLoginListParameter() { return xgetSQuePmMap("memberStatusCode_QueryDerivedReferrer_MemberLoginList"); }
     public String keepMemberStatusCode_QueryDerivedReferrer_MemberLoginListParameter(Object pm) { return xkeepSQuePm("memberStatusCode_QueryDerivedReferrer_MemberLoginList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
@@ -127,7 +127,7 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
       return _memberStatusName; }
     protected ConditionValue xgetCValueMemberStatusName() { return xdfgetMemberStatusName(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -147,7 +147,7 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
       return _description; }
     protected ConditionValue xgetCValueDescription() { return xdfgetDescription(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * DESCRIPTION: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -167,16 +167,16 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
       return _displayOrder; }
     protected ConditionValue xgetCValueDisplayOrder() { return xdfgetDisplayOrder(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * DISPLAY_ORDER: {UQ, NotNull, INTEGER(10)}
+     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }

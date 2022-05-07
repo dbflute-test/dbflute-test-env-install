@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of MEMBER as TABLE. <br>
+ * The behavior of member as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_ID
@@ -38,10 +40,10 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     MEMBER_STATUS, MEMBER_SECURITY(AsOne), MEMBER_SERVICE(AsOne), MEMBER_WITHDRAWAL(AsOne)
+ *     member_status, member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  *
  * [referrer table]
- *     MEMBER_ADDRESS, MEMBER_FOLLOWING, MEMBER_LOGIN, PURCHASE, MEMBER_SECURITY, MEMBER_SERVICE, MEMBER_WITHDRAWAL
+ *     member_address, member_following, member_login, purchase, member_security, member_service, member_withdrawal
  *
  * [foreign property]
  *     memberStatus, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
@@ -65,7 +67,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     /** {@inheritDoc} */
     public MemberDbm asDBMeta() { return MemberDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "MEMBER"; }
+    public String asTableDbName() { return "member"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">member</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -157,7 +159,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId : PK, ID, NotNull, INTEGER(10). (NotNull)
+     * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -315,7 +317,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -386,7 +388,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
+     * member_address by MEMBER_ID, named 'memberAddressList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">addressCB</span>.setupSelect...
@@ -417,7 +419,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
+     * member_address by MEMBER_ID, named 'memberAddressList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">member</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">addressCB</span>.setupSelect...
@@ -450,7 +452,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberFollowingByMyMemberIdList by the set-upper of referrer. <br>
-     * MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
+     * member_following by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByMyMemberId</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">followingCB</span>.setupSelect...
@@ -481,7 +483,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberFollowingByMyMemberIdList by the set-upper of referrer. <br>
-     * MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
+     * member_following by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByMyMemberId</span>(<span style="color: #553000">member</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">followingCB</span>.setupSelect...
@@ -514,7 +516,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberFollowingByYourMemberIdList by the set-upper of referrer. <br>
-     * MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
+     * member_following by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByYourMemberId</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">followingCB</span>.setupSelect...
@@ -545,7 +547,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberFollowingByYourMemberIdList by the set-upper of referrer. <br>
-     * MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
+     * member_following by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByYourMemberId</span>(<span style="color: #553000">member</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">followingCB</span>.setupSelect...
@@ -578,7 +580,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
+     * member_login by MEMBER_ID, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">loginCB</span>.setupSelect...
@@ -609,7 +611,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
+     * member_login by MEMBER_ID, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">member</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">loginCB</span>.setupSelect...
@@ -642,7 +644,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * PURCHASE by MEMBER_ID, named 'purchaseList'.
+     * purchase by MEMBER_ID, named 'purchaseList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">purchaseCB</span>.setupSelect...
@@ -673,7 +675,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * PURCHASE by MEMBER_ID, named 'purchaseList'.
+     * purchase by MEMBER_ID, named 'purchaseList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">member</span>, <span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">purchaseCB</span>.setupSelect...
@@ -1356,8 +1358,8 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * memberBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * memberBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * memberBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * memberBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * memberBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -1365,7 +1367,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * memberBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * memberBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * memberBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * memberBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * memberBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -1373,7 +1375,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * memberBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * memberBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * memberBhv.outideSql().removeBlockComment().selectList()
      * memberBhv.outideSql().removeLineComment().selectList()
      * memberBhv.outideSql().formatSql().selectList()
@@ -1397,4 +1399,25 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     protected Class<? extends Member> typeOfSelectedEntity() { return Member.class; }
     protected Class<Member> typeOfHandlingEntity() { return Member.class; }
     protected Class<MemberCB> typeOfHandlingConditionBean() { return MemberCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

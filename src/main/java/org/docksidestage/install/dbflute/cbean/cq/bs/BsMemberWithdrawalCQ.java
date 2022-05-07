@@ -13,7 +13,7 @@ import org.docksidestage.install.dbflute.cbean.*;
 import org.docksidestage.install.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of MEMBER_WITHDRAWAL.
+ * The base condition-query of member_withdrawal.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
@@ -35,7 +35,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from MEMBER_WITHDRAWAL) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from member_withdrawal) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join MEMBER_WITHDRAWAL on ... and FOO = [value] ...}
+     * {select ... from ... left outer join member_withdrawal on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -79,16 +79,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _memberId; }
     protected ConditionValue xgetCValueMemberId() { return xdfgetMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -99,16 +99,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _withdrawalReasonCode; }
     protected ConditionValue xgetCValueWithdrawalReasonCode() { return xdfgetWithdrawalReasonCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalReasonCode_Asc() { regOBA("WITHDRAWAL_REASON_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalReasonCode_Desc() { regOBD("WITHDRAWAL_REASON_CODE"); return this; }
@@ -119,16 +119,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _withdrawalReasonInputText; }
     protected ConditionValue xgetCValueWithdrawalReasonInputText() { return xdfgetWithdrawalReasonInputText(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * WITHDRAWAL_REASON_INPUT_TEXT: {CLOB(2147483647)}
+     * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalReasonInputText_Asc() { regOBA("WITHDRAWAL_REASON_INPUT_TEXT"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * WITHDRAWAL_REASON_INPUT_TEXT: {CLOB(2147483647)}
+     * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalReasonInputText_Desc() { regOBD("WITHDRAWAL_REASON_INPUT_TEXT"); return this; }
@@ -139,16 +139,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _withdrawalDatetime; }
     protected ConditionValue xgetCValueWithdrawalDatetime() { return xdfgetWithdrawalDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * WITHDRAWAL_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalDatetime_Asc() { regOBA("WITHDRAWAL_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * WITHDRAWAL_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalDatetime_Desc() { regOBD("WITHDRAWAL_DATETIME"); return this; }
@@ -159,16 +159,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _registerDatetime; }
     protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -179,7 +179,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _registerUser; }
     protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -199,16 +199,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _updateDatetime; }
     protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -219,7 +219,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _updateUser; }
     protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -232,26 +232,6 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_UpdateUser_Desc() { regOBD("UPDATE_USER"); return this; }
-
-    protected ConditionValue _versionNo;
-    public ConditionValue xdfgetVersionNo()
-    { if (_versionNo == null) { _versionNo = nCV(); }
-      return _versionNo; }
-    protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
-
-    /** 
-     * Add order-by as ascend. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
-     * @return this. (NotNull)
-     */
-    public BsMemberWithdrawalCQ addOrderBy_VersionNo_Asc() { regOBA("VERSION_NO"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
-     * @return this. (NotNull)
-     */
-    public BsMemberWithdrawalCQ addOrderBy_VersionNo_Desc() { regOBD("VERSION_NO"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -307,7 +287,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * MEMBER by my MEMBER_ID, named 'member'.
+     * member by my MEMBER_ID, named 'member'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMember() {
@@ -319,7 +299,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
         return xgetQueRlMap(prop);
     }
     protected MemberCQ xcreateQueryMember() {
-        String nrp = xresolveNRP("MEMBER_WITHDRAWAL", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_withdrawal", "member"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "member", nrp);
     }
     protected void xsetupOuterJoinMember() { xregOutJo("member"); }
@@ -327,7 +307,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * WITHDRAWAL_REASON by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
+     * withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
      * @return The instance of condition-query. (NotNull)
      */
     public WithdrawalReasonCQ queryWithdrawalReason() {
@@ -339,7 +319,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
         return xgetQueRlMap(prop);
     }
     protected WithdrawalReasonCQ xcreateQueryWithdrawalReason() {
-        String nrp = xresolveNRP("MEMBER_WITHDRAWAL", "withdrawalReason"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("member_withdrawal", "withdrawalReason"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new WithdrawalReasonCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "withdrawalReason", nrp);
     }
     protected void xsetupOuterJoinWithdrawalReason() { xregOutJo("withdrawalReason"); }

@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsWithdrawalReason;
 
 /**
- * The entity of WITHDRAWAL_REASON.
+ * The entity of withdrawal_reason.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

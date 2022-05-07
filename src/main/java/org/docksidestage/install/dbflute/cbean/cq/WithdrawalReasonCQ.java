@@ -5,7 +5,7 @@ import org.dbflute.cbean.sqlclause.SqlClause;
 import org.docksidestage.install.dbflute.cbean.cq.bs.BsWithdrawalReasonCQ;
 
 /**
- * The condition-query of WITHDRAWAL_REASON.
+ * The condition-query of withdrawal_reason.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.

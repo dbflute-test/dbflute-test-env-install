@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dbflute.*;
 import org.dbflute.bhv.*;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
 import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
@@ -11,6 +12,7 @@ import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import org.docksidestage.install.dbflute.exbhv.*;
@@ -20,7 +22,7 @@ import org.docksidestage.install.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.install.dbflute.cbean.*;
 
 /**
- * The behavior of MEMBER_LOGIN as TABLE. <br>
+ * The behavior of member_login as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_LOGIN_ID
@@ -38,7 +40,7 @@ import org.docksidestage.install.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     MEMBER_STATUS, MEMBER
+ *     member_status, member
  *
  * [referrer table]
  *     
@@ -65,7 +67,7 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
     /** {@inheritDoc} */
     public MemberLoginDbm asDBMeta() { return MemberLoginDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "MEMBER_LOGIN"; }
+    public String asTableDbName() { return "member_login"; }
 
     // ===================================================================================
     //                                                                        New Instance
@@ -107,7 +109,7 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
      *     ... = <span style="color: #553000">memberLogin</span>.get...
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
      * <span style="color: #0000C0">memberLoginBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -186,8 +188,8 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
 
     /**
      * Select the entity by the unique-key value.
-     * @param memberId : UQ+, IX, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
-     * @param loginDatetime : +UQ, IX, NotNull, TIMESTAMP(23, 10). (NotNull)
+     * @param memberId : UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param loginDatetime : +UQ, IX, NotNull, DATETIME(19). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -316,7 +318,7 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
     //                                                                       Load Referrer
     //                                                                       =============
     /**
-     * Load referrer for the list by the the referrer loader.
+     * Load referrer for the list by the referrer loader.
      * <pre>
      * List&lt;Member&gt; <span style="color: #553000">memberList</span> = <span style="color: #0000C0">memberBhv</span>.selectList(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
@@ -838,8 +840,8 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
     /**
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
-     * <span style="color: #3F7E5E">// main style</span> 
-     * memberLoginBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span> 
+     * <span style="color: #3F7E5E">// main style</span>
+     * memberLoginBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
      * memberLoginBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
      * memberLoginBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
      * memberLoginBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
@@ -847,7 +849,7 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
      * memberLoginBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
      * memberLoginBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
-     * <span style="color: #3F7E5E">// traditional style</span> 
+     * <span style="color: #3F7E5E">// traditional style</span>
      * memberLoginBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
      * memberLoginBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
      * memberLoginBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
@@ -855,7 +857,7 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
      * memberLoginBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
      * memberLoginBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
-     * <span style="color: #3F7E5E">// options</span> 
+     * <span style="color: #3F7E5E">// options</span>
      * memberLoginBhv.outideSql().removeBlockComment().selectList()
      * memberLoginBhv.outideSql().removeLineComment().selectList()
      * memberLoginBhv.outideSql().formatSql().selectList()
@@ -873,4 +875,25 @@ public abstract class BsMemberLoginBhv extends AbstractBehaviorWritable<MemberLo
     protected Class<? extends MemberLogin> typeOfSelectedEntity() { return MemberLogin.class; }
     protected Class<MemberLogin> typeOfHandlingEntity() { return MemberLogin.class; }
     protected Class<MemberLoginCB> typeOfHandlingConditionBean() { return MemberLoginCB.class; }
+
+    // ===================================================================================
+    //                                                                            Accessor
+    //                                                                            ========
+    @Override
+    @javax.annotation.Resource(name="behaviorCommandInvoker")
+    public void setBehaviorCommandInvoker(BehaviorCommandInvoker behaviorCommandInvoker) {
+        super.setBehaviorCommandInvoker(behaviorCommandInvoker);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="behaviorSelector")
+    public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
+        super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
+    }
 }

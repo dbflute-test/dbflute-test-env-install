@@ -3,7 +3,7 @@ package org.docksidestage.install.dbflute.exentity;
 import org.docksidestage.install.dbflute.bsentity.BsPurchasePayment;
 
 /**
- * The entity of PURCHASE_PAYMENT.
+ * The entity of purchase_payment.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.
